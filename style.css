@@ -13,16 +13,17 @@ Text Domain: Nathalie Mota
 
 
 body {
-    margin-top: 0px;
+    margin-top: 90px;
     background-color: #ffffff;
 }
 
-/* Style de l'en-Tête */
+/* Header - en-Tête */
 header {
     position: fixed;
-    width:3440px;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 80px;
-    top:0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,17 +33,80 @@ header {
     z-index: 10;
 }
 
-/* Style du Logo de l'En-Tête */
+/* Header - Logo de l'En-Tête */
 .header-logo img {
     width: 216px;
     height: 14px;
     margin-left: 60%;
 }
 
-/* Styles du Conteneur de Logo */
+/* Header - Conteneur de Logo */
 .logo-container img {
     padding-left: 0px;
     padding-top: 35px;
     width: 212px;
 }
 
+/* Header - Menu de l'En-Tête */
+.header-menu {
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+/* Header - Liens du Menu de l'En-Tête et du Pied de Page */
+.header-menu li a,
+.footer-menu li a {
+    text-decoration: none;
+    color: #000;
+    font-family: "Space Mono", monospace;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 23.7px;
+    letter-spacing: 0.1em;
+    text-align: left;
+}
+
+/* Header - Listes du Menu de l'En-Tête et du Pied de Page */
+.header-menu ul,
+.footer-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-right: 250px;
+   
+}
+
+/* Header - Éléments de Liste du Menu de l'En-Tête et du Pied de Page */
+
+.header-menu li,
+.footer-menu li {
+    margin-right: 12px;
+}
+
+
+
+/* Footer - Pied de page */
+.footer-menu {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid #000;
+    padding-top: 10px;
+    background-color: #ffffff;
+}
+
+/* Footer - Éléments de Liste du Menu du Pied de Page */
+.footer-menu li {
+    margin: 0 15px;
+    display: inline;
+}
+
+/* Footer - Liens du Menu du Pied de Page */
+.footer-menu a {
+    text-decoration: none;
+    padding-top: 5px;
+}

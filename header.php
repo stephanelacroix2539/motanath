@@ -7,7 +7,7 @@
 </head>
 <body>
     
-
+<?php wp_head(); ?>
  <!-- Section d'en-tête -->
  <header>
         <!-- Logo de l'en-tête -->
@@ -21,13 +21,19 @@
             </a>
         </div>
 
-        <!-- Bouton du Menu Mobile -->
-        <div class="mobile-menu-button" id="open-fullscreen-menu-button">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
 
+        <!-- Menu principal -->
+        <nav class="header-menu">
+            <div class="close-button-container">
+            <?php
+            // Affiche le menu en utilisant 'main-menu'
+            wp_nav_menu([
+                'theme_location' => 'main-menu',
+                'container'      => false
+            ]);
+            ?>
+        </nav>
+            
 
 
 
