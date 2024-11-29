@@ -26,3 +26,14 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   
 
+
+// Ouverture photo
+
+jQuery(document).ready(function($) {
+    $('#contact-button').on('click', function() {
+        let photoRef = $(this).data('ref');
+        alert("Référence photo : " + photoRef); // Exemple, remplacez par l'ouverture de votre popup
+        // Code pour ouvrir la popup et préremplir avec photoRef
+    });
+});
+

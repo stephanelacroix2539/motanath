@@ -19,8 +19,8 @@ body {
 
 /* Header - en-Tête */
 header {
-    position: fixed;
-    top: 0;
+    position: relative;
+    top: -90;
     left: 0;
     right: 0;
     height: 80px;
@@ -32,6 +32,8 @@ header {
     box-shadow: 0px 4px 14px 10px #00000008;
     z-index: 10;
 }
+
+
 
 /* Header - Logo de l'En-Tête */
 .header-logo img {
@@ -51,8 +53,11 @@ header {
 .header-menu {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Distribution uniforme */
     padding: 0;
+    width: 30%; /* Optionnel si vous voulez occuper tout l'espace */
 }
+
 
 /* Header - Liens du Menu de l'En-Tête et du Pied de Page */
 .header-menu li a,
@@ -65,6 +70,8 @@ header {
     line-height: 23.7px;
     letter-spacing: 0.1em;
     text-align: left;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 /* Header - Listes du Menu de l'En-Tête et du Pied de Page */
@@ -74,7 +81,7 @@ header {
     margin: 0;
     padding: 0;
     display: flex;
-    margin-right: 250px;
+    margin-right: 0;
    
 }
 
@@ -148,3 +155,28 @@ header {
     color: black;
     text-decoration: none;
   }
+
+
+
+
+
+/* Hero */
+.hero {
+    position: relative;
+    height: 782px;
+}
+
+/* Style | Hero Image */
+.photo-details {
+    padding: 20px;
+}
+
+.photo-content img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.photo-meta p {
+    font-size: 16px;
+    color: #333;
+}

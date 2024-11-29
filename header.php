@@ -7,7 +7,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    
 <?php wp_head(); ?>
  <!-- Section d'en-tête -->
  <header>
@@ -34,10 +33,5 @@
             ]);
             ?>
         </nav>
-            
-  
-
-
-</header>
-        
+		</header>
 

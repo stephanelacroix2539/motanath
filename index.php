@@ -2,7 +2,13 @@
 <?php get_header(); ?>
 
 
-<h1> Bienvenue test 1 </h1>
+<?php
+// Redirige vers le fichier dans le répertoire templates
+get_template_part('single-photo');
+?>
+
+
 
 <?php get_footer(); ?>
+
 
