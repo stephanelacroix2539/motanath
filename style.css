@@ -13,7 +13,7 @@ Text Domain: Nathalie Mota
 
 
 body {
-    margin-top: 90px;
+    margin-top: 0px;
     background-color: #ffffff;
 }
 
@@ -161,10 +161,22 @@ header {
 
 
 /* Hero */
-.hero {
-    position: relative;
-    height: 782px;
+.hero .hero-image {
+  width: 100%;
+  height: 862px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.hero .hero-title {
+  color: white;
+  font-size: 120px;
+  color: transparent;
+  -webkit-text-stroke: 3px white;
+}
+
 
 /* Style | Hero Image */
 .photo-details {

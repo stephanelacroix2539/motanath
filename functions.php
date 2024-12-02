@@ -31,27 +31,15 @@ function my_theme_enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
 
 
-// photo
-function register_my_custom_post_type() {
-    $args = array(
-        'public' => true,
-        'label'  => 'Photos',
-        'rewrite' => array( 'slug' => 'photo' ), // Assurez-vous que le slug est bien 'photo'
-        'show_in_rest' => true, // Si vous utilisez l'éditeur Gutenberg
-    );
-    register_post_type('photo', $args);
-}
-add_action('init', 'register_my_custom_post_type');
 
-add_filter('template_include', function($template) {
-    if (is_singular('photo')) {  // Remplacez 'photo' par le slug de votre CPT
-        $new_template = locate_template('single-photo.php');
-        if (!empty($new_template)) {
-            return $new_template;  // Charge le template single-photo.php
-        }
-    }
-    return $template;
-});
+// hero
+function enqueue_hero_script() {
+    wp_enqueue_script('hero-script', get_stylesheet_directory_uri() . '/js/hero.js', array(), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_hero_script');
+
+// photo
+
 
 
 
