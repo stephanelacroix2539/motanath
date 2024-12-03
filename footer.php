@@ -1,3 +1,7 @@
+<?php
+// Inclure la modale de contact 
+get_template_part('templates_part/modal-contact');
+?>
 <footer>
     <nav class="footer-menu">
         <?php
@@ -9,11 +13,8 @@
     </nav>
 </footer>
 
-<?php
-// Inclure la modale de contact
-get_template_part('templates_part/modal-contact');
-?>
 
+	
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -1,11 +1,11 @@
 
-
+<!-- Affichage du Héro -->
 <?php get_header();?>
 <body>
     <main>
     
         <div class = "hero">
-        <?php // Affichage du héro
+        <?php 
 
             query_posts(array('post_type' => 'photo', 'orderby' => 'rand', 'showposts' => 1 ));
             if (have_posts()) :
@@ -18,5 +18,9 @@
         </div>
 
 
+</main>
 
-        <?php get_footer();?>
+
+</body>
+
+     <?php get_footer();?>

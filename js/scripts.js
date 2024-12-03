@@ -1,39 +1,30 @@
-// Gestion de la modale
+// Gestion de la modale contact
 
+ 
 document.addEventListener('DOMContentLoaded', function () {
-    // Récupérer les éléments de la modale
-    var contactLink = document.querySelector('a[href="#contact"]');
-    var modal = document.getElementById('contactModal');
-    var closeModal = document.getElementById('closeModal');
-  
-    // Ouvrir la modale lorsque l'utilisateur clique sur le lien "Contact"
-    contactLink.addEventListener('click', function (e) {
-      e.preventDefault();  // Empêcher le comportement de défilement du lien
-      modal.style.display = 'block';  // Afficher la modale
-    });
-  
-    // Fermer la modale lorsque l'utilisateur clique sur le bouton de fermeture
-    closeModal.addEventListener('click', function () {
-      modal.style.display = 'none';  // Masquer la modale
-    });
-  
-    // Fermer la modale si l'utilisateur clique en dehors de la modale
-    window.addEventListener('click', function (e) {
-      if (e.target === modal) {
-        modal.style.display = 'none';  // Masquer la modale
-      }
-    });
-  });
-  
+    const modal = document.getElementById('contactModal');
+    const closeModal = document.getElementById('closeModal');
 
+    // Ouvrir la modale via l'élément du menu
+    const menuItem = document.getElementById('menu-item-13');
+    if (menuItem) {
+        menuItem.addEventListener('click', (event) => {
+            event.preventDefault(); // Empêche le lien par défaut
+            modal.style.display = 'block';
+        });
+    }
 
-// Ouverture photo
+    // Fermer la modale avec le bouton de fermeture
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 
-jQuery(document).ready(function($) {
-    $('#contact-button').on('click', function() {
-        let photoRef = $(this).data('ref');
-        alert("Référence photo : " + photoRef); // Exemple, remplacez par l'ouverture de votre popup
-        // Code pour ouvrir la popup et préremplir avec photoRef
+    // Fermer la modale en cliquant à l'extérieur
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
     });
 });
+
 
