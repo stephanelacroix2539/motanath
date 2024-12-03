@@ -28,3 +28,57 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
+// Popup Contact préremplie avec jQuery //
+document.addEventListener('DOMContentLoaded', function () {
+    const contactButton = document.getElementById('contact-button');
+
+    if (contactButton) {
+        contactButton.addEventListener('click', function () {
+            const reference = this.getAttribute('data-reference');
+            document.getElementById('contactModal').style.display = 'block';
+
+            // Préremplir le champ de référence dans la popup
+            const referenceInput = document.querySelector('[name="ref-photo"]');
+            if (referenceInput) {
+                referenceInput.value = reference;
+            }
+        });
+    }
+});
+
+
+// Pagination charger plus ajax //
+document.getElementById('load-more').addEventListener('click', function () {
+    let button = this;
+    let page = parseInt(button.getAttribute('data-page'));
+    let nextPage = page + 1;
+
+    fetch(ajaxurl + '?action=load_more_photos&page=' + nextPage)
+        .then(response => response.text())
+        .then(data => {
+            if (data.trim() !== '') {
+                document.getElementById('photo-container').innerHTML += data;
+                button.setAttribute('data-page', nextPage);
+            } else {
+                button.style.display = 'none';
+            }
+        });
+});
+
+
+// Gestion des filtres // 
+document.querySelectorAll('.filters select').forEach(select => {
+    select.addEventListener('change', function () {
+        const category = document.getElementById('filter-category').value;
+        const format = document.getElementById('filter-format').value;
+        const sortOrder = document.getElementById('sort-order').value;
+
+        fetch(ajaxurl + '?action=filter_photos&category=' + category + '&format=' + format + '&sort_order=' + sortOrder)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('photo-container').innerHTML = data;
+                document.getElementById('load-more').setAttribute('data-page', 1);
+            });
+    });
+});

@@ -1,16 +1,22 @@
+
+
 <?php
-//   Vignettes d'images pour son affichage dans le front-page
-    
-    ?>  
-    <article class="photo filtered-image">
-        <div class="rollover-image rowling-image">
-            <span class="rollover-titre">
-          
-            </span>
-            <span class="rollover-fullscreen fa-solid fa-expand fa-2xl" data-lightbox-item-id="<?php echo get_the_ID(); ?>"></span>
-           
-            <a href="<?php the_permalink(); ?>" class="rollover-eye fa-solid fa-eye fa-2xl"></a>
+$args = [
+    'post_type'      => 'photo',
+    'posts_per_page' => 8,
+    'paged'          => 1,
+];
+$query = new WP_Query($args);
+
+if ($query->have_posts()) :
+    while ($query->have_posts()) : $query->the_post(); ?>
+        <div class="photo-block">
+            <a href="<?php the_permalink(); ?>">
+                <?php the_post_thumbnail('thumbnail'); ?>
+                <h3><?php the_title(); ?></h3>
+            </a>
         </div>
-            <?php the_post_thumbnail(); ?>
-                                    
-    </article>
+    <?php endwhile;
+endif;
+wp_reset_postdata();
+?>

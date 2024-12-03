@@ -244,9 +244,6 @@ header {
 }
 
 
-
-
-
 /* Hero */
 .hero .hero-image {
   width: 100%;
@@ -281,3 +278,41 @@ header {
 }
 
 
+/* Single photo */
+
+.single-photo {
+  padding: 5vw;
+}
+
+.photo-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-image {
+  width: 80vw;
+  height: auto;
+  object-fit: cover;
+}
+
+.related-photos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vw;
+}
+
+.photo-block {
+  width: calc(50% - 2vw);
+  transition: transform 0.3s ease;
+}
+
+.photo-block:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .photo-block {
+      width: calc(100% - 2vw);
+  }
+}
