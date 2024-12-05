@@ -53,11 +53,10 @@
     <div id="photo-container">
         <?php get_template_part('templates_part/photo-block'); ?>
     </div>
-    <button id="load-more" data-page="1">Charger plus</button>
-
 </main>
-
-
+<div class="button-load">
+<button id="load-more" data-page="1">Charger plus</button>
+</div>
 </body>
 
      <?php get_footer();?>

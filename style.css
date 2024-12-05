@@ -278,41 +278,305 @@ header {
 }
 
 
-/* Single photo */
-
-.single-photo {
-  padding: 5vw;
+/* Gallerie page principal */
+.photo-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.photo-content {
+#photo-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+  gap: 15px; /* Pas d'espacement entre les photos */
+  width: 1148px;
+height: 2040px;
+top: 1204px;
+left: 146px;
+
+}
+
+.photo-block img {
+  width: 564px; /* Largeur fixe */
+  height: 495px; /* Hauteur fixe */
+  object-fit: cover; /* Ajuste l'image sans déformation */
+  border: 1px solid transparent; /* Bordure transparente pour uniformité */
+  opacity: 1; /* Rendre les images visibles */
+  transition: opacity 0.5s ease-in-out; /* Animation douce pour l'apparition */
+}
+
+.photo-block img.hidden {
+  opacity: 0; /* Opacité à 0 pour masquer si nécessaire */
+}
+
+
+
+
+/* Filtres */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 0 40px 0;
+  width: 80%;
+  margin: auto;
+}
+
+
+.filters select {
+  width: 260px;
+  height: 43px;
+  margin-bottom: 0px;
+  box-sizing: border-box;
+  border-radius: 10px; 
+  border: 1px solid #ccc; 
+  padding: 5px; 
+} 
+
+
+
+.filter-category {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-left: 20%;
+}
+
+.filter-format {
+  width: 100%;
+  padding: 4px 0;
+  box-sizing: border-box;   
+ 
+}
+
+.sort-order{
+  width: 100%;
+}
+
+
+
+/* Single photo */
+
+.single-page {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 80px;
+  width: 100%;
+  height: 100vh; /* La zone de contenu s'adapte à la hauteur de l'écran */
+  overflow: hidden;
 }
 
-.photo-image {
-  width: 80vw;
-  height: auto;
-  object-fit: cover;
-}
-
-.related-photos-list {
+.single-detail {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2vw;
+  justify-content: space-between;
+  width: 70%;
+  margin-bottom: 30px;
+  flex-grow: 1; /* Permet au bloc de s'étendre selon la hauteur de l'écran */
 }
 
-.photo-block {
-  width: calc(50% - 2vw);
-  transition: transform 0.3s ease;
+.photo-title {
+  width: 420px;
+ height: 116px;
+ gap: 0px;
+  font-family: 'Space Mono', monospace;
+  font-size: 66px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 58px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  text-transform: uppercase;
+}
+.detail {
+  padding-top: 20%;
 }
 
-.photo-block:hover {
-  transform: scale(1.05);
+.detail-info {
+  width: 50%;
+  padding-right: 20px;
+  text-transform: uppercase;
+  margin-top: 180px;
 }
 
-@media (max-width: 768px) {
-  .photo-block {
-      width: calc(100% - 2vw);
-  }
+.detail-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.detail-photo {
+width: 100%;
+height: auto;
+text-transform: uppercase;
+font-family: Space Mono;
+font-size: 14px;
+font-weight: 400;
+line-height: 20.73px;
+letter-spacing: 0.1em;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+}
+
+
+.picture {
+  object-fit: contain; /* L'image reste à sa taille native sans être croppée */
+  width: 50%;
+  height: auto;
+  max-height: 500%;
+}
+
+.contact-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 118px;
+  margin-top: 30px;
+  margin-left: 100%;
+}
+.contact-single {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 118px; /* Hauteur du bloc d'interactions */
+  padding: 24px 0;
+  margin-top: 30px;
+}
+
+.button-single {
+  width: 272px;
+  height: 50px;
+  top: 1000px;
+  left: 438px;
+  padding: 8px 15px;
+  gap: 10px;
+  border-radius: 2px 0px 0px 0px;
+  background: #D8D8D8;
+  border: none;
+  box-shadow: 0px 2px 1px 0px #00000005; /* Ajout de l'ombre */
+  transition: all 0.3s ease; /* Transition pour les effets au survol et au clic */
+}
+
+.button-single:active {
+  box-shadow: 0px 2px 1px 0px #00000020; /* Ombre plus sombre au clic */
+  background-color: #C0C0C0; /* Fond plus foncé lors du clic */
+}
+
+.button-single:hover {
+  cursor: pointer;
+  background-color: #B8B8B8; /* Optionnel : changer le fond au survol */
+}
+
+.contact-info a {
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+.contact-info a:hover {
+  color: #0073e6;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.nav-link {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #000;
+}
+
+.nav-link:hover {
+  color: #0073e6;
+}
+
+.related-photos {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.related-photo {
+  position: relative;
+  width: 48%; /* Deux photos côte à côte */
+}
+
+.related-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.photo-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 10px;
+  visibility: hidden;
+}
+
+.related-photo:hover .photo-overlay {
+  visibility: visible; /* Affichage des icônes au survol */
+}
+
+.eye-icon,
+.fullscreen-icon {
+  font-size: 24px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.eye-icon:hover,
+.fullscreen-icon:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+/* Bouton charger plus */
+
+#load-more {
+  width: 272px;
+  height: 50px;
+  border: none;
+  top: 3284px;
+  left: 584px;
+  padding: 8px 15px;
+  gap: 10px;
+  border-radius: 2px 0px 0px 0px;
+  background: #D8D8D8;
+  box-shadow: 0px 2px 1px 0px #00000005; /* Ajout du box-shadow */
+  transition: all 0.3s ease; /* Ajout d'une transition pour les effets au survol et au clic */
+}
+
+#load-more:active {
+  box-shadow: 0px 2px 1px 0px #00000020; /* Box-shadow plus sombre lors du clic */
+  background-color: #C0C0C0; /* Fond plus foncé lors du clic */
+}
+
+#load-more:hover {
+  cursor: pointer; /* Ajout du curseur pointer au survol */
+  background-color: #B8B8B8; /* Optionnel : Changer le fond au survol */
+}
+
+
+.button-load{
+  display: flex;
+  justify-content: center;
+  margin-top: 56px;
+  margin-bottom: 56px;
 }

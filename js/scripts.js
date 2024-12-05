@@ -48,24 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Pagination charger plus ajax //
-document.getElementById('load-more').addEventListener('click', function () {
-    let button = this;
-    let page = parseInt(button.getAttribute('data-page'));
-    let nextPage = page + 1;
-
-    fetch(ajaxurl + '?action=load_more_photos&page=' + nextPage)
-        .then(response => response.text())
-        .then(data => {
-            if (data.trim() !== '') {
-                document.getElementById('photo-container').innerHTML += data;
-                button.setAttribute('data-page', nextPage);
-            } else {
-                button.style.display = 'none';
-            }
-        });
-});
-
 
 // Gestion des filtres // 
 document.querySelectorAll('.filters select').forEach(select => {
