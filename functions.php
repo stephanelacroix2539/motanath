@@ -45,55 +45,34 @@ add_action( 'wp_enqueue_scripts', 'my_enqueue_scripts' );
 
 // pagination ajax
 function load_more_photos() {
-    // Vérifie si la page existe et est valide
-    if ( isset( $_GET['page'] ) && is_numeric( $_GET['page'] ) ) {
-        $page = (int) $_GET['page'];
+    $args = [
+        'post_type'      => 'photo',
+        'posts_per_page' => 8,
+        'paged'          => $_POST['page'],
+    ];
+    $query = new WP_Query($args);
 
-        // Défini la quantité de photos par page
-        $posts_per_page = 1;
+    if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post(); ?>
+            <div class="photo-block">
+                <a href="<?php the_permalink(); ?>" class="photo-link">
+                    <?php the_post_thumbnail('medium', ['class' => 'photo-thumbnail']); ?>
+                    <div class="overlay">
+                        <span class="photo-title"><?php the_title(); ?></span>
+                        <span class="photo-category"><?php the_terms(get_the_ID(), 'photo_category'); ?></span>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_eye.png" alt="Voir plus" class="icon-eye">
+                    </div>
+                </a>
+            </div>
+        <?php endwhile;
+    endif;
 
-        // Calcul des offsets
-        $offset = ( $page - 1 ) * $posts_per_page;
+    wp_reset_postdata();
 
-        // Query WP pour récupérer les photos
-        $args = array(
-            'post_type'      => 'photo', // Remplace 'photo' par ton type de contenu
-            'posts_per_page' => $posts_per_page,
-            'offset'         => $offset,
-            'post_status'    => 'publish',
-        );
-
-        $query = new WP_Query( $args );
-
-        if ( $query->have_posts() ) {
-            // Si des photos sont récupérées, on les affiche
-            while ( $query->have_posts() ) {
-                $query->the_post();
-                ?>
-                <div class="photo-item">
-                    <?php the_post_thumbnail(); ?>
-                    <h3><?php the_title(); ?></h3>
-                </div>
-                <?php
-            }
-        }
-
-        // Si aucune photo n'est trouvée, renvoie une chaîne vide
-        else {
-            echo '';
-        }
-
-        // Termine la requête
-        wp_reset_postdata();
-    }
-
-    // Toujours terminer l'exécution AJAX avec die()
     die();
 }
-
-add_action( 'wp_ajax_load_more_photos', 'load_more_photos' );
-add_action( 'wp_ajax_nopriv_load_more_photos', 'load_more_photos' );
-
+add_action('wp_ajax_load_more_photos', 'load_more_photos'); // pour les requêtes AJAX
+add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos'); // pour les utilisateurs non connectés
 
 
 // function des filtres

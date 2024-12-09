@@ -1,124 +1,224 @@
 <?php
 
 get_header() ?>
-<!-- Variable pour le détail des photos --> 
-<?php 
-	$refPhoto = get_field("reference"); // retourne la valeur de champ
-	$post = get_the_ID(); //  Récupère l'ID de l'élément dans la boucle Wordpress
-	$category = get_the_terms( $post, "categorie"); // Récupère les termes de la taxonomie qui sont attachés au poste
-	$categoryPhoto = $category [0]-> name; // Appelle le nom de catégorie
-	$typePhoto = get_field ("type");
-	$format = get_the_terms ($post , "format");
-	$formatPhoto = $format [0]-> name;
-	$datePhoto = get_the_date("Y"); // Récupère l'année du poste
-	$url = get_permalink();
-// Variables flèches précédente et suivante 
-	$nextPost = get_next_post();
-	$previousPost = get_previous_post();
-// Variable pour récupérer l'ID 
-	$id = get_the_ID();	
 
-?>
-<div class="single-page">
-	<div class="single-detail container">
-		<div class="detail">
-			<div class="details-photos">
-				<h2 class="photo-title"><?php echo the_title() ?> </h2>
-				<p class="detail-photo">Référence : <span><?php echo $refPhoto ?></span></p>
-				<p class="detail-photo">Catégorie : <span><?php echo $categoryPhoto ?></span></p>
-				<p class="detail-photo">Format : <span><?php echo $formatPhoto ?></span></p>
-				<p class="detail-photo">Type : <span><?php echo $typePhoto ?></span></p>
-				<p class="detail-photo">Année : <span><?php echo $datePhoto ?></span></p>
-			</div>
-		</div>
-		<div class="single-photo-container">
-			<img class="picture" src="<?php echo get_the_post_thumbnail_url(); ?>"alt="photo" >
-		</div>
+<main id="main" class="content-area">
+    <div class="zone-contenu mobile-first">
+        <!-- Information de la Photo -->
+        <div class="left-container">
+            <div class="left-contenu">
+                <h1><?php the_title(); ?></h1>
+
+                <?php
+                // Référence de la photo
+                // Récupère la valeur du champ personnalisé 'reference_photo' et l'affiche s'il existe.
+				$reference_photo = get_field('reference');
+                if ($reference_photo) {
+                    echo '<p>Référence : <span id="ph-reference">' . esc_html($reference_photo) . '</span></p>';
+                }
+
+                // Catégories de la photo
+                // Récupère les catégories associées à la photo actuelle.
+                $categories = get_the_terms(get_the_ID(), 'categorie');
+                $current_category_slugs = array(); // Initialise un tableau vide pour les slugs de catégorie.
+
+                if ($categories) {
+                    // Parcourir les catégories et stocker leurs slugs dans le tableau.
+                    foreach ($categories as $category) {
+                        $current_category_slugs[] = $category->slug;
+                    }
+                }
+
+                if ($categories) {
+                    // Si des catégories existent, les afficher.
+                    echo '<p>Catégorie : <span id="ph-category">';
+                    $category_names = array();
+                    foreach ($categories as $category) {
+                        $category_names[] = esc_html($category->name);
+                    }
+                    echo implode(', ', $category_names); // Utiliser implode pour joindre les noms de catégorie par une virgule.
+                    echo '</span></p>';
+                }
+
+              
+                // Récupère les termes de format associés à la photo actuelle.
+                $format_terms = get_the_terms(get_the_ID(), 'format');
+                if ($format_terms) {
+                    // Si des termes de format existent, les afficher.
+                    echo '<p>Format : ';
+                    $format_names = array();
+                    foreach ($format_terms as $format_term) {
+                        $format_names[] = esc_html($format_term->name);
+                    }
+                    echo implode(', ', $format_names); // Utiliser implode pour joindre les noms de format par une virgule.
+                    echo '</p>';
+                }
+
+            
+                // Récupère la valeur du champ personnalisé 'type_de_photo' et l'affiche s'il existe.
+                $type_de_photo = get_field('type');
+                if ($type_de_photo) {
+                    echo '<p>Type : ' . esc_html($type_de_photo) . '</p>';
+                }
+
+                // Récupère l'année de capture et l'affiche si elle existe.
+                $date_capture = get_the_date('Y');
+                if ($date_capture) {
+                    echo '<p>Année : ' . esc_html($date_capture) . '</p>';
+                }
+                ?>
+            </div>
+        </div>
+        <!-- Photo [data-lightbox="image-gallery"]-->
+        <div class="right-container">
+            <?php if (has_post_thumbnail()) : ?>
+                <a data-href="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id(), 'large')[0]; ?>" class="photo">
+                    <?php the_post_thumbnail(); ?>
+                </a>
+                <i class="fas fa-expand-arrows-alt fullscreen-icon"></i><!-- Fullscreen icon -->
+            <?php endif; ?>
+            
+        </div>
+    </div>
+    <!-- Contact & Navigation Photos -->
+    <div class="zone-contact">
+        <!-- Contact - Bouton Modal avec reference -->
+        <div class="left-contact">
+            <div class="texte-contact">
+                <p>Cette photo vous intéresse ?</p>
+            </div>
+			
+            <div class="bouton-contact">
+			<button class="bouton-contact" data-reference="<?= $refPhoto ?>">Contact</button></p>
+                <?php include get_template_directory() . '/templates_part/modal-contact.php'; ?>
+
+                <?php
+                // Récupère la valeur du champ personnalisé 'reference_photo' et la définit comme une variable JavaScript.
+                $reference_photo = get_field('reference_photo');
+                if ($reference_photo) {
+                    echo '<script type="text/javascript">';
+                    echo 'var acfReferencePhoto = "' . esc_js($reference_photo) . '";';
+                    echo '</script>';
+                }
+                ?>
+            </div>
+        </div>
+        <!-- Contact - Navigation de photos - Fleches & Miniature -->
+        <div class="right-contact">
+            <?php
+            // Récupère l'ID de la publication actuelle.
+            $current_post_id = get_the_ID();
+
+            // Récupère toutes les publications de type 'photo'.
+            $args = array(
+                'post_type' => 'photo',
+                'posts_per_page' => -1,
+                'order' => 'ASC',
+            );
+            $all_photo_posts = get_posts($args);
+
+            // Trouve l'index de la publication actuelle dans le tableau de toutes les publications de photos.
+            $current_post_index = array_search($current_post_id, array_column($all_photo_posts, 'ID'));
+
+            // Calcule les index des publications précédentes et suivantes.
+            $prev_post_index = $current_post_index - 1;
+            $next_post_index = $current_post_index + 1;
+
+            // Récupère les publications précédentes et suivantes.
+            $prev_post = ($prev_post_index >= 0) ? $all_photo_posts[$prev_post_index] : end($all_photo_posts);
+            $next_post = ($next_post_index < count($all_photo_posts)) ? $all_photo_posts[$next_post_index] : reset($all_photo_posts);
+
+            $prev_permalink = get_permalink($prev_post);
+            $next_permalink = get_permalink($next_post);
+
+            // Récupère les miniatures des publications précédentes et suivantes.
+
+            $prev_thumbnail = get_the_post_thumbnail($prev_post, 'thumbnail');
+            $next_thumbnail = get_the_post_thumbnail($next_post, 'thumbnail');
+            ?>
+
+            <!-- Conteneur de miniatures individuelles -->
+             <!-- Mini slider sélection des images --> 
 	
-	</div>
-
-
-	<div class="contact-single">
-		<div class="container">
-		<div class="contact-button">
-			<p>Cette photo vous intéresse ?
-			<button class="button-single btn-contact" data-reference="<?= $refPhoto ?>">Contact</button></p>
-		</div>
-		<!-- Mini slider sélection des images --> 
-		<div class="mini-slider">
-			<?php 
-			// Pour récupérer les publications de type "photo"
-			$args = array(
-				'post_type' => 'photo', // poste de type photo
-				'posts_per_page' => -1, // Pour voir tous les posts
-				'order' => 'ASC', // En ordre croissant 
-			);
-			?>
-			<div class="arrows">
-
-			<div class="thumbnail"></div>
-
-			<?php if($previousPost): ?>				
-				<a href="<?= get_permalink($previousPost -> ID); ?>" class="previous-thumbnail-link" data-image="<?= get_the_post_thumbnail_url($previousPost->ID, 'thumbnail'); ?>">
-					<img class="arrow" src="<?= get_template_directory_uri() .'/assets/images/arrow-left.png';?>" alt="image flèche précédente">
-				</a>
-			<?php endif; ?>
-			<?php if($nextPost): ?>
-				<a href="<?= get_permalink($nextPost ->ID)?>" class="next-thumbnail-link"  data-image="<?= get_the_post_thumbnail_url($nextPost->ID, 'thumbnail'); ?>">
-					<img class="arrow" src="<?php echo get_template_directory_uri() .'/assets/images/arrow-right.png';?>" alt="image flèche suivante">
-				</a>
 			
-			<?php endif; ?>
-				
-			</div>			
-		</div>
-			</div>
-	</div>
-
-	<!-- Section Photos apparentées -->
-	<div class="related-photos">
-		<div class="container">
-		<h3>Vous aimerez aussi</h3>
-		<div class="photo-container">
-			<?php 
-			// Récupération de la catégorie du single post 
-			foreach(get_the_terms(get_the_ID(), 'categorie') as $category){
-				$postCategory = $category ->name; // Nom de la taxonomie du poste actuel 
-			}
-			// Récupère 2 photos de manière aléatoire de même catégorie que la photo actuelle 
-			$relatedPhoto= array(
-				'post_type' => 'photo',
-				'posts_per_page' => 2,
-				'orderby' =>'rand', // par ordre aléatoire 
-				'post__not_in' =>array($id), // pour ne pas afficher la photo actuelle
-				'tax_query' => array(   // Utilise les paramètres de taxonomie
-				array(
-					'taxonomy' => 'categorie', // Nom de la taxonomie
-					'field' => 'slug', // Qu'on récupère par son Slug
-					'terms' => $postCategory,
-				),
-				),
-			);
-			$my_query = new WP_Query($relatedPhoto);
-			if($my_query -> have_posts()) : while ($my_query -> have_posts()) : $my_query -> the_post();
-			?>
-			<div class="container-photo">
-				<?php get_template_part('./templates_part/photo-block'); ?>
-			</div>
-			<?php endwhile;
-			else : 
-				echo "Aucune autre photo dans cette catégorie ";
-			
-			endif;
-
-			wp_reset_postdata(); // Pour s'assurer que le $post global a été restauré 
-			
-			?>
-		</div>
-		</div>
-	</div>
-
 	
-</div>
+            <div class="thumbnail-container">
+                <div class="thumbnail-wrapper">
+                    <!-- Initialement, le contenu de la miniature sera vide -->
+                </div>
+                <a href="<?php echo esc_url($prev_permalink); ?>" class="arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($prev_post, 'thumbnail')); ?>" id="prev-arrow-link">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fleche-gauche.png" alt="Précédent" class="arrow-img-gauche" id="prev-arrow" />
+                </a>
+                <a href="<?php echo esc_url($next_permalink); ?>" class="arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($next_post, 'thumbnail')); ?>" id="next-arrow-link">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fleche-droite.png" alt="Suivant" class="arrow-img-droite" id="next-arrow" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Photos Apparentées -->
+    <div class="related-images">
+        <h3>VOUS AIMEREZ AUSSI</h3>
+        <div class="image-container">
+            <?php
+            // Récupère deux photos aléatoires de la même catégorie que la photo actuelle.
+            $args_related_photos = array(
+                'post_type' => 'photo',
+                'posts_per_page' => 2,
+                'orderby' => 'rand',
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'categorie',
+                        'field' => 'slug',
+                        'terms' => $current_category_slugs, // Utilise le slug de la catégorie de la photo actuelle
+                    ),
+                ),
+            );
+
+            $related_photos_query = new WP_Query($args_related_photos);
+
+            while ($related_photos_query->have_posts()) :
+                $related_photos_query->the_post();
+            ?>
+                <div class="related-image">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php if (has_post_thumbnail()) : ?>
+                            <div class="image-wrapper">
+                                <?php the_post_thumbnail(); ?>
+                                <!-- Section | Overlay Catalogue -->
+                                <div class="thumbnail-overlay-single">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_eye.png" alt="Icône de l'œil"> <!-- Icône de l'œil | Information Photo -->
+                                    <i class="fas fa-expand-arrows-alt fullscreen-icon"></i><!-- Icône plein écran -->
+                                    <?php
+                                    // Récupère la référence et la catégorie de l'image associée.
+                                    $related_reference_photo = get_field('reference_photo');
+                                    $related_categories = get_the_terms(get_the_ID(), 'categorie');
+                                    $related_category_names = array();
+
+                                    if ($related_categories) {
+                                        foreach ($related_categories as $category) {
+                                            $related_category_names[] = esc_html($category->name);
+                                        }
+                                    }
+                                    ?>
+                                    <div class="photo-info">
+									<div class="photo-info-left">
+                                            <p><?php echo esc_html($related_reference_photo); ?></p>
+                                        </div>
+                                        <div class="photo-info-right">
+                                            <p><?php echo implode(', ', $related_category_names); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </a>
+                </div>
+            <?php endwhile; ?>
+
+            <?php wp_reset_postdata(); // Restaure les données originales des publications ?>
+        </div>
+    </div>
+</main>
 
 <?php get_footer()?>

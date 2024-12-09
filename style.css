@@ -11,6 +11,37 @@ Text Domain: Nathalie Mota
 */
 
 
+h1 {
+  font-family: "Space Mono", monospace;
+  font-size: 6rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  color: var(--full-black);
+  margin-bottom: 0;
+}
+
+h2 {
+  font-family: "Space Mono", monospace;
+  font-size: 4.125rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 3.625rem;
+  text-transform: uppercase;
+  color: var(--full-black);
+  margin-bottom: 0;
+}
+
+h3 {
+  font-family: "Space Mono", monospace;
+  font-size: 1.125rem;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--full-black);
+  margin-bottom: 0;
+}
 
 body {
     margin-top: 0px;
@@ -91,6 +122,21 @@ header {
 .footer-menu li {
     margin-right: 12px;
 }
+
+/* Effet hover pour les éléments de menu spécifiques */
+.header-menu .menu-item-11 a, 
+.header-menu .menu-item-12 a, 
+.header-menu .menu-item-13 a {
+    font-weight: 500; /* Poids de police normal par défaut */
+}
+
+.header-menu .menu-item-11 a:hover, 
+.header-menu .menu-item-12 a:hover, 
+.header-menu .menu-item-13 a:hover {
+    font-weight: bold; /* Passe en gras au survol */
+}
+
+
 
 
 
@@ -315,236 +361,522 @@ left: 146px;
 /* Filtres */
 .filters {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: 80px 0 40px 0;
   width: 80%;
   margin: auto;
+  padding: 80px 0 40px 0;
+  justify-content: flex-start; /* Aligne les éléments à gauche */
+  gap: 20px; /* Ajoute un espace entre les éléments */
 }
 
-
 .filters select {
-  width: 260px;
+  width: 272px;
   height: 43px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   box-sizing: border-box;
   border-radius: 10px; 
   border: 1px solid #ccc; 
-  padding: 5px; 
-} 
-
-
-
-.filter-category {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-left: 20%;
+  padding: 5px;
+  flex-shrink: 0; /* Empêche les éléments de se réduire */
 }
 
-.filter-format {
-  width: 100%;
-  padding: 4px 0;
-  box-sizing: border-box;   
- 
+/* Filtre Catégorie (à droite) */
+#filter-category {
+  margin-left: 510px; /* Pousse l'élément à droite */
+}
+#filter-category li:hover {
+  background-color: red;
+  color: white;
 }
 
-.sort-order{
-  width: 100%;
+#filter-category li:hover a {
+  background-color: red;
+  color: white;
 }
+
+
+/* Filtre Format (à côté de Catégorie) */
+#filter-format {
+  margin-right: 20px; /* Ajoute un espacement à droite */
+}
+
+/* Tri des résultats (à gauche) */
+#sort-order {
+  margin-left: 270px; /* Pousse l'élément à droite */
+  margin-right: 80px; /* Ajoute un espacement de 80px à droite */
+}
+
+
 
 
 
 /* Single photo */
-
-.single-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 80px;
-  width: 100%;
-  height: 100vh; /* La zone de contenu s'adapte à la hauteur de l'écran */
-  overflow: hidden;
+.zone-contenu,
+.zone-contact {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1126px;
+    margin: 0 auto;
 }
 
-.single-detail {
-  display: flex;
-  justify-content: space-between;
-  width: 70%;
-  margin-bottom: 30px;
-  flex-grow: 1; /* Permet au bloc de s'étendre selon la hauteur de l'écran */
+/* Bouton myBtn-photo */
+#myBtn-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 232px;
+    height: 50px;
+    border-radius: 2px;
+    transition: .3s ease-in-out;
+    cursor: pointer;
+    font-family: Space Mono;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17.77px;
+    letter-spacing: 0em;
+    text-align: center;
+    border: none;
+    background-color: #D8D8D8;
+    color: #000000;
+    text-decoration: none;
 }
 
-.photo-title {
-  width: 420px;
- height: 116px;
- gap: 0px;
-  font-family: 'Space Mono', monospace;
-  font-size: 66px;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 58px;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-  text-transform: uppercase;
-}
-.detail {
-  padding-top: 20%;
+#myBtn-photo:hover {
+    background-color: #cccaca;
 }
 
-.detail-info {
-  width: 50%;
-  padding-right: 20px;
-  text-transform: uppercase;
-  margin-top: 180px;
+/* Modale photo */
+.modal-photo {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.822);
+    overflow: auto;
 }
 
-.detail-info h2 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+/* Contenu de la modale photo */
+.modal-content-photo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    max-width: 80%;
+    height: auto;
+    background-color: #fff;
+    padding: 20px;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.8s;
+    animation-name: animatetop;
+    animation-duration: 0.8s;
+    animation-timing-function: ease;
 }
 
-.detail-photo {
-width: 100%;
-height: auto;
-text-transform: uppercase;
-font-family: Space Mono;
-font-size: 14px;
-font-weight: 400;
-line-height: 20.73px;
-letter-spacing: 0.1em;
-text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
+/* Bouton de fermeture de la modale photo */
+.close-photo {
+    font-family: "Space Mono", monospace;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
 }
 
-
-.picture {
-  object-fit: contain; /* L'image reste à sa taille native sans être croppée */
-  width: 50%;
-  height: auto;
-  max-height: 500%;
+.close-photo:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.contact-button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 118px;
-  margin-top: 30px;
-  margin-left: 100%;
-}
-.contact-single {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 118px; /* Hauteur du bloc d'interactions */
-  padding: 24px 0;
-  margin-top: 30px;
+.close-photo:hover {
+    text-decoration: underline;
 }
 
-.button-single {
+/* Modale en version mobile */
+@media (max-width: 768px) {
+    .modal-content-photo {
+        max-width: 95%;
+        /*overflow-y: auto !important;*/
+        /*max-height: 71vh !important;*/
+    }
+    .left-contact {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+    }
+    .left-contact .texte-contact,
+    .left-contact div {
+        width: 100%;
+    }
+    .zone-contact {
+        justify-content: center;
+    }
+}
+
+/* Texte de contact */
+.texte-contact p {
+    font-family: Poppins;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+/* Partie gauche de la page */
+.left-container,
+.left-contact {
+    align-content: center;
+    flex: 1;
+    position: relative;
+    max-width: 49%;
+    height: auto;
+}
+
+/* Bordure basse de la partie gauche */
+.left-container,
+.zone-contact {
+    border-bottom: 2px solid #000;
+}
+
+/* Partie de contact à gauche */
+.left-contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+/*  Titre dans la partie gauche */
+.left-container h1 {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 66px;
+    line-height: 58px;
+    text-transform: uppercase;
+}
+
+/* Paragraphe dans la partie gauche */
+.left-container p {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20.73px;
+    letter-spacing: 10%;
+    text-transform: uppercase;
+}
+
+/* Partie droite de la page et photos */
+.right-container,
+.photo {
+    flex: 1;
+    position: relative;
+    max-width: 50%;
+    height: auto;
+}
+
+/*  Partie droite en version mobile */
+.right-container.mobile-first {
+    order: -1;
+}
+
+/* Image à l'intérieur de la partie photo */
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Version mobile */
+@media (max-width: 768px) {
+    .zone-contenu,
+    .zone-contact,
+    .left-container,
+    .right-container {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .left-container h1 {
+        font-size: 44px;
+    }
+
+    .zone-contenu.mobile-first {
+        flex-direction: column-reverse;
+    }
+
+    .right-container .photo img {
+        max-width: 100%;
+        height: auto;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .left-contact {
+        flex-direction: column;
+        align-items: center;
+        max-width: 65%;
+    }
+
+    .left-contact .texte-contact,
+    .left-contact div {
+        width: 100%;
+    }
+}
+
+/* Écrans larges */
+@media (min-width: 1024px) {
+    .left-container {
+        padding-top: 52vh;
+    }
+
+    .right-container {
+        margin-left: 20px;
+    }
+}
+
+/* Flèches de navigation */
+@media (max-width: 768px) {
+    .right-contact,
+    .prev-photo,
+    .next-photo {
+      display: none;
+    }
+}
+
+/* Conteneurs dans la partie de contact à droite */
+.right-contact > div {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px 0 30px 10px;
+}
+
+/* Flèches d'images */
+.arrow-img {
+    width: 33px;
+    height: 10px;
+    margin: 0 5px; 
+    vertical-align: middle;
+}
+
+/* Flèches d'images gauche et droite au survol */
+.arrow-img-gauche,
+.arrow-img-droite {
+    transition: transform 0.2s ease;
+}
+
+.arrow-img-gauche:hover,
+.arrow-img-droite:hover {
+    transform: scale(1.2);
+}
+
+/* Conteneur des miniatures */
+.thumbnail-container {
+    text-align: center; 
+    width: 80px;
+    height: 80px; 
+}
+
+/* Images des miniatures */
+.thumbnail-container img {
+    max-width: 100%; 
+    max-height: 100%;
+}
+
+/* Image de la flèche gauche des miniatures */
+.thumbnail-container img.arrow-img-gauche {
+    display: block;
+    margin-right: 7px;
+    margin-top: 10px;
+}
+
+/* Image de la flèche droite des miniatures */
+.thumbnail-container img.arrow-img-droite {
+    display: block;
+    margin-top: -8px;
+    margin-left: 54px;
+}
+
+/* Section des images liées */
+.related-images {
+    max-width: 1126px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+/*  Titre de la section des images liées */
+.related-images h3 {
+    font-family: 'Space Mono', sans-serif;
+    font-size: 18px; 
+    font-weight: 400;
+    line-height: 26.66px;
+    letter-spacing: 0.1em;
+    text-align: left;
+}
+
+/* Conteneurs des images liées */
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px; 
+}
+
+/*  Conteneurs des images liées individuelles */
+.related-image {
+    flex: 1;
+    margin-right: 10px;
+    text-align: center;
+}
+
+/* Images à l'intérieur des conteneurs d'images liées */
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%;
+}
+
+/* Images à l'intérieur des conteneurs d'images liées */
+.image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Styles pour les écrans de largeur inférieure à 768 pixels */
+
+@media (max-width: 768px) {
+    /* Modifier la mise en page des conteneurs d'images en une seule colonne */
+    .image-container {
+        display: block;
+    }
+
+    /* Ajuster la largeur et l'espacement des images associées individuelles */
+    .related-image {
+        flex: 1; /* Pleine largeur - une seule colonne */
+        margin-right: 0; /* Supprimer la marge droite pour l'espacement */
+        margin-bottom: 10px; /* Ajouter une marge inférieure pour l'espacement */
+    }
+
+}
+
+/* Conteneur du bouton de la page d'accueil */
+.home-button {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin-top: 20px;
+}
+
+/* Bouton de la page d'accueil */
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 272px;
+    height: 50px;
+    background-color: #D8D8D8;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 2px;
+    font-weight: bold;
+    transition: .3s ease-in-out;
+    cursor: pointer;
+    font-family: Space Mono;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17.77px;
+    letter-spacing: 0em;
+    text-align: center;
+    border: none;
+}
+
+.button:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+/* Superposition et Icônes */
+.thumbnail-overlay-single {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s;
+    text-align: center;
+}
+
+.thumbnail-overlay-single:hover {
+    opacity: 1;
+}
+
+.photo-info {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.photo-info-left,
+.photo-info-right {
+    width: 60%;
+}
+
+.thumbnail-overlay-single img {
+    width: 46px;
+    height: 32px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.fullscreen-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+}
+ 
+.bouton-contact {
   width: 272px;
   height: 50px;
-  top: 1000px;
-  left: 438px;
+  border: none;
+  top: 3284px;
+  left: 584px;
   padding: 8px 15px;
   gap: 10px;
   border-radius: 2px 0px 0px 0px;
   background: #D8D8D8;
-  border: none;
-  box-shadow: 0px 2px 1px 0px #00000005; /* Ajout de l'ombre */
-  transition: all 0.3s ease; /* Transition pour les effets au survol et au clic */
+  box-shadow: 0px 2px 1px 0px #00000005; /* Ajout du box-shadow */
+  transition: all 0.3s ease;
 }
 
-.button-single:active {
-  box-shadow: 0px 2px 1px 0px #00000020; /* Ombre plus sombre au clic */
-  background-color: #C0C0C0; /* Fond plus foncé lors du clic */
-}
-
-.button-single:hover {
-  cursor: pointer;
-  background-color: #B8B8B8; /* Optionnel : changer le fond au survol */
-}
-
-.contact-info a {
-  font-size: 1rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #000;
-}
-
-.contact-info a:hover {
-  color: #0073e6;
-}
-
-.pagination {
-  display: flex;
-  justify-content: flex-end;
-  gap: 20px;
-}
-
-.nav-link {
-  font-size: 1rem;
-  text-decoration: none;
-  color: #000;
-}
-
-.nav-link:hover {
-  color: #0073e6;
-}
-
-.related-photos {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 30px;
-  gap: 20px;
-}
-
-.related-photo {
-  position: relative;
-  width: 48%; /* Deux photos côte à côte */
-}
-
-.related-photo img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.photo-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  gap: 10px;
-  visibility: hidden;
-}
-
-.related-photo:hover .photo-overlay {
-  visibility: visible; /* Affichage des icônes au survol */
-}
-
-.eye-icon,
-.fullscreen-icon {
-  font-size: 24px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 5px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.eye-icon:hover,
-.fullscreen-icon:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
 
 
 /* Bouton charger plus */
@@ -579,4 +911,109 @@ text-decoration-skip-ink: none;
   justify-content: center;
   margin-top: 56px;
   margin-bottom: 56px;
+}
+
+
+/* overlay */
+.photo-block {
+  position: relative;
+  display: inline-block;
+  width: 564px; /* Largeur spécifique pour le bloc */
+  height: 495px; /* Hauteur spécifique pour le bloc */
+  overflow: hidden; /* Cache le contenu non souhaité */
+  font-family: 'Space Mono', monospace; /* Police monospace */
+}
+
+.photo-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.photo-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Pour adapter l'image sans déformation */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-family: 'Space Mono', monospace; /* Police monospace */
+}
+
+.photo-block:hover .overlay {
+  opacity: 1;
+}
+
+.overlay .icon-eye {
+  width: 46px; /* Taille fixe de l'icône */
+  height: 31px;
+  display: block;
+  color: #fff; /* Assure la visibilité de l'icône contre le fond */
+  position: absolute;
+  top: 50%; /* Positionnement vertical au centre */
+  left: 50%; /* Positionnement horizontal au centre */
+  transform: translate(-50%, -50%); /* Centrer l'icône */
+}
+
+.overlay .photo-title {
+  color: #fff;
+  font-size: 14px; /* Taille de la police en pixels */
+  text-align: left; /* Aligné à gauche */
+  margin-left: 10px; /* Espacement de 10px du bord gauche */
+  position: absolute;
+  bottom: 10px; /* Positionnement à la base de l'overlay */
+  left: 10px; /* Aligné à gauche */
+  font-family: 'Poppins', sans-serif; /* Utilisation de la police Poppins */
+  font-weight: 500; /* Poids de la police */
+  text-transform: uppercase;
+}
+
+
+
+.overlay .photo-category {
+  color: #fff;
+  font-size: 14px; /* Taille de la police en pixels */
+  text-align: left; /* Aligné à gauche */
+  margin-left: 460px; /* Espacement de 10px du bord gauche */
+  position: absolute;
+  bottom: 10px; /* Positionnement à la base de l'overlay */
+  left: 10px; /* Aligné à gauche */
+  font-family: 'Poppins', sans-serif; /* Utilisation de la police Poppins */
+  font-weight: 500; /* Poids de la police */
+  text-transform: uppercase;
+}
+
+.overlay .category-badge {
+  color: #ffffff; /* Texte blanc */
+  font-family: 'Poppins', sans-serif; /* Police Poppins */
+  font-weight: 500;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 3px; /* Pour adoucir les coins */
+  text-align: center; /* Alignement du texte au centre */
+  white-space: nowrap; /* Évite l'affichage sur plusieurs lignes si le texte est trop long */
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Ombre pour ajouter du relief */
+  opacity: 0; /* Transparent par défaut */
+  transition: opacity 0.3s ease; /* Animation de transition d'opacité */
+  position: absolute;
+  bottom: 10px; /* Espacement depuis le bas de l'overlay */
+  right: 10px; /* Espacement depuis la droite de l'overlay */
+  z-index: 10; /* Permet de superposer le badge à l'overlay */
+}
+
+.photo-block:hover .overlay .category-badge {
+  opacity: 1; /* Affiche le badge sur survol */
 }

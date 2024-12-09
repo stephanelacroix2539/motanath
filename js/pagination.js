@@ -1,28 +1,32 @@
 /* Script de la pagination */
+/* Script de la pagination */
+jQuery(document).ready(function($) {
+    var page = 1;
+    var loading = false;
 
-document.getElementById('load-more').addEventListener('click', function () {
-    let button = this;
-    let page = parseInt(button.getAttribute('data-page'));
-    let nextPage = page + 1;
+    $('#load-more').on('click', function() {
+        if (loading) return;
 
-    fetch(ajaxurl + '?action=load_more_photos&page=' + nextPage)
-        .then(response => response.text())
-        .then(data => {
-            if (data.trim() !== '') {
-                let photoContainer = document.getElementById('photo-container');
-                photoContainer.innerHTML += data; // Ajouter les nouvelles photos
+        loading = true;
+        page++;
 
-                // Assurez-vous que les images nouvellement ajoutées ont le même style
-                let newPhotos = photoContainer.querySelectorAll('.photo-block img');
-                newPhotos.forEach(function(photo) {
-                    photo.style.width = '100%';  // Assure-toi que chaque image occupe toute la largeur du bloc
-                    photo.style.height = 'auto'; // Pour garder les proportions
-                });
-
-                button.setAttribute('data-page', nextPage);
-            } else {
-                button.style.display = 'none'; // Masquer le bouton si plus de contenu à charger
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+                action: 'load_more_photos',
+                page: page
+            },
+            success: function(response) {
+                if (response) {
+                    $('#photo-container').append(response);
+                } else {
+                    $('#load-more').hide(); // Pas plus de photos à charger
+                }
+                loading = false;
             }
         });
+    });
 });
+
 

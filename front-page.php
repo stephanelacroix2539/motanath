@@ -2,6 +2,8 @@
 <!-- Affichage du Héro -->
 <?php get_header();?>
 <body>
+<script src="<?php echo get_template_directory_uri(); ?>/assets/js/ajax-load-more.js"></script>
+
     <main>
     
         <div class = "hero">
@@ -28,6 +30,7 @@
         }
         ?>
     </select>
+
 
     <!-- Filtre Format -->
     <select id="filter-format">
@@ -56,6 +59,7 @@
 </main>
 <div class="button-load">
 <button id="load-more" data-page="1">Charger plus</button>
+
 </div>
 </body>
 
