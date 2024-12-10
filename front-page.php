@@ -1,8 +1,8 @@
 
-<!-- Affichage du Héro -->
 <?php get_header();?>
 <body>
-<script src="<?php echo get_template_directory_uri(); ?>/assets/js/ajax-load-more.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 
     <main>
     
@@ -46,9 +46,13 @@
     <!-- Tri des résultats -->
     <select id="sort-order">
         <option value="">TRIER PAR</option>
-        <option value="date_desc">Plus récents</option>
-        <option value="date_asc">Plus anciens</option>
+        <option value="date_desc">à partir des plus récentes </option>
+        <option value="date_asc">à partir des
+        plus anciennes</option>
     </select>
+</div>
+<div id="photo-results">
+    <!-- Les résultats des photos seront affichés ici -->
 </div>
 
 
@@ -61,6 +65,12 @@
 <button id="load-more" data-page="1">Charger plus</button>
 
 </div>
-</body>
+<script>
+jQuery(document).ready(function($) {
+    // Appliquer Select2 aux menus déroulants
+    $('#filter-category, #filter-format, #sort-order').select2();
+});
+</script>
 
+</body>
      <?php get_footer();?>

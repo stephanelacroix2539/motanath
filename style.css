@@ -329,17 +329,16 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-right: 5%;
 }
 
 #photo-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
-  gap: 15px; /* Pas d'espacement entre les photos */
-  width: 1148px;
-height: 2040px;
-top: 1204px;
-left: 146px;
-
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  width: 50%;
+  height: auto;
+  margin: 0 auto; /* Ajouter cette propriété pour centrer horizontalement */
 }
 
 .photo-block img {
@@ -366,6 +365,10 @@ left: 146px;
   padding: 80px 0 40px 0;
   justify-content: flex-start; /* Aligne les éléments à gauche */
   gap: 20px; /* Ajoute un espace entre les éléments */
+  margin-left: 25%;
+  font-family: 'Poppins', sans-serif; /* Application de la police */
+  font-size: 12px; /* Taille de la police */
+  font-weight: 500; /* Style medium */
 }
 
 .filters select {
@@ -377,6 +380,9 @@ left: 146px;
   border: 1px solid #ccc; 
   padding: 5px;
   flex-shrink: 0; /* Empêche les éléments de se réduire */
+  font-family: 'Poppins', sans-serif; /* Application de la police */
+  font-size: 12px; /* Taille de la police */
+  font-weight: 500; /* Style medium */
 }
 
 /* Filtre Catégorie (à droite) */
@@ -401,12 +407,47 @@ left: 146px;
 
 /* Tri des résultats (à gauche) */
 #sort-order {
-  margin-left: 270px; /* Pousse l'élément à droite */
-  margin-right: 80px; /* Ajoute un espacement de 80px à droite */
+  margin-left: 170px; /* Pousse l'élément à droite */
+  margin-right: 180px !important; /* Ajoute un espacement de 80px à droite */
+}
+
+/* Style pour les options survolées dans Select2 */
+.select2-results__option--highlighted {
+  background-color: red !important; /* Fond rouge au survol */
+  color: white !important; /* Texte blanc */
+}
+
+/* Couleur par défaut des options dans la liste déroulante */
+.select2-results__option {
+  color: black; /* Couleur noire par défaut pour les options */
+}
+
+/* Apparence générale des menus déroulants */
+.select2-selection {
+  background-color: white; /* Fond blanc pour le menu */
+  color: black; /* Texte noir par défaut */
+  border: 1px solid #ccc; /* Bordure des champs */
+  border-radius: 4px; /* Bordure arrondie */
+}
+
+/* Survol des champs de sélection */
+.select2-selection:hover {
+  background-color: rgb(255, 255, 255); 
 }
 
 
 
+
+
+#photo-results {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 15px;
+  width: 50%;
+  height: auto;
+  margin: 0 auto; /* Ajouter cette propriété pour centrer horizontalement */
+}
 
 
 /* Single photo */
@@ -847,21 +888,6 @@ left: 146px;
     width: 60%;
 }
 
-.thumbnail-overlay-single img {
-    width: 46px;
-    height: 32px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.fullscreen-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #fff;
-}
  
 .bouton-contact {
   width: 272px;
@@ -1016,4 +1042,16 @@ left: 146px;
 
 .photo-block:hover .overlay .category-badge {
   opacity: 1; /* Affiche le badge sur survol */
+}
+
+
+.overlay .icon-fullscreen {
+  width: 34px;
+  height: 34px;
+  opacity: 0.7; /* Opacité initiale de l'icône */
+  transition: opacity 0.3s; /* Animation de fondu pour l'icône */
+  cursor: pointer; /* Indicateur que l'icône est cliquable */
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

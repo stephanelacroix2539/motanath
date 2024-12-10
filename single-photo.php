@@ -186,8 +186,8 @@ get_header() ?>
                             <div class="image-wrapper">
                                 <?php the_post_thumbnail(); ?>
                                 <!-- Section | Overlay Catalogue -->
-                                <div class="thumbnail-overlay-single">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_eye.png" alt="Icône de l'œil"> <!-- Icône de l'œil | Information Photo -->
+                                <div class="">
+                                   
                                     <i class="fas fa-expand-arrows-alt fullscreen-icon"></i><!-- Icône plein écran -->
                                     <?php
                                     // Récupère la référence et la catégorie de l'image associée.
@@ -206,7 +206,7 @@ get_header() ?>
                                             <p><?php echo esc_html($related_reference_photo); ?></p>
                                         </div>
                                         <div class="photo-info-right">
-                                            <p><?php echo implode(', ', $related_category_names); ?></p>
+                                            
                                         </div>
                                     </div>
                                 </div>
