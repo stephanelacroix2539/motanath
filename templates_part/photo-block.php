@@ -40,6 +40,5 @@ if ($query->have_posts()) :
 endif;
 wp_reset_postdata();
 
-// Inclut la structure de la lightbox
-get_template_part('templates_part/lightbox');
+
 ?>

@@ -3,35 +3,64 @@ document.addEventListener("DOMContentLoaded", function () {
     const fullscreenIcons = document.querySelectorAll(".icon-fullscreen");
     const lightboxModal = document.getElementById("lightbox-modal");
     const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxTitle = document.getElementById("lightbox-title");
+    const prevButton = document.getElementById("prev-image");
+    const nextButton = document.getElementById("next-image");
 
-    // Fonction pour ouvrir la lightbox
-    function openInLightbox(event) {
-        event.preventDefault();
-        const image = event.target.closest(".photo-block").querySelector(".photo-thumbnail");
-        if (image) {
-            lightboxImage.src = image.src; // Récupère la source de l'image
-            lightboxModal.style.display = "flex";
-        }
-    }
+    let currentImageIndex = 0;
+    const images = [];
 
-    // Fonction pour fermer la lightbox
-    function closeLightbox() {
-        lightboxModal.style.display = "none";
-        lightboxImage.src = ""; // Réinitialise l'image
-    }
+    // Récupère toutes les images avec leur titre
+    fullscreenIcons.forEach((icon, index) => {
+        const photoBlock = icon.closest(".photo-block");
+        const image = photoBlock.querySelector(".photo-thumbnail");
+        const title = photoBlock.querySelector(".photo-title").innerText;
 
-    // Écouteur sur chaque icône fullscreen
-    fullscreenIcons.forEach(icon => {
-        icon.addEventListener("click", openInLightbox);
+        images.push({
+            src: image.src,
+            title: title,
+        });
+
+        // Ajoute l'écouteur pour ouvrir la lightbox
+        icon.addEventListener("click", function (event) {
+            event.preventDefault();
+            openInLightbox(index);
+        });
     });
 
-    // Fermeture de la modale en cliquant sur l'overlay
+    // Ouvrir la lightbox avec une image
+    function openInLightbox(index) {
+        currentImageIndex = index;
+        lightboxImage.src = images[currentImageIndex].src;
+        lightboxTitle.textContent = images[currentImageIndex].title;
+        lightboxModal.style.display = "flex";
+    }
+
+    // Fermer la lightbox
+    function closeLightbox() {
+        lightboxModal.style.display = "none";
+        lightboxImage.src = "";
+    }
+
+    // Navigation vers l'image précédente
+    prevButton.addEventListener("click", function () {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        openInLightbox(currentImageIndex);
+    });
+
+    // Navigation vers l'image suivante
+    nextButton.addEventListener("click", function () {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        openInLightbox(currentImageIndex);
+    });
+
+    // Fermer la lightbox en cliquant sur l'overlay
     lightboxModal.addEventListener("click", function (event) {
-        if (event.target === lightboxModal) {
+        if (event.target === lightboxModal || event.target.classList.contains("lightbox-close")) {
             closeLightbox();
         }
     });
 
-    // Ajout de la fonction closeLightbox à la portée globale (pour le bouton)
+    // Export global de closeLightbox
     window.closeLightbox = closeLightbox;
 });

@@ -13,6 +13,10 @@ get_template_part('templates_part/modal-contact');
     </nav>
 </footer>
 
+<?php
+// Lightbox globale intégrée au footer
+get_template_part('templates_part/lightbox');
+?>
 
 	
 <?php wp_footer(); ?>
