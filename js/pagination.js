@@ -1,4 +1,4 @@
-/* Script de la pagination */
+
 /* Script de la pagination */
 jQuery(document).ready(function($) {
     var page = 1;

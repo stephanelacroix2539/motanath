@@ -23,15 +23,21 @@
         </div>
 
 
-        <!-- Menu principal -->
-        <nav class="header-menu">
-            <div class="close-button-container">
-            <?php
-            // Affiche le menu en utilisant 'main-menu'
-            wp_nav_menu([
-                'theme_location' => 'main-menu',
-                'container'      => false
-            ]);
-            ?>
-        </nav>
-		</header>
+   <!-- Menu principal -->
+<nav class="header-menu">
+    <div class="burger-button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="menu-container">
+        <?php
+        // Affiche le menu en utilisant 'main-menu'
+        wp_nav_menu([
+            'theme_location' => 'main-menu',
+            'container'      => false
+        ]);
+        ?>
+    </div>
+</nav>
+</header>

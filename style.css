@@ -291,37 +291,40 @@ header {
 
 
 /* Hero */
-.hero .hero-image {
-  width: 100%;
-  height: 962px;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.hero .hero-title {
-  color: white;
-  font-size: 120px;
-  color: transparent;
-  -webkit-text-stroke: 3px white;
+.hero {
+  .hero-image {
+    width: 100%;
+    height: 100vh; /* Ajuste la hauteur pour les écrans plus petits */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-title {
+    color: white;
+    font-size: 5vw; /* Réduit la taille de la police pour les plus petits écrans */
+    color: transparent;
+    -webkit-text-stroke: 1px white; /* Réduit l'épaisseur pour les plus petits écrans */
+  }
 }
 
-
-/* Style | Hero Image */
 .photo-details {
-    padding: 20px;
+  padding: 10px; /* Réduit le padding pour les plus petits écrans */
 }
 
 .photo-content img {
-    width: 100%;
-    object-fit: cover;
+  width: 100%; /* Maintient l'image entière à 100% de la largeur disponible */
+  object-fit: cover;
+  max-width: 100%; /* Évite que l'image ne soit trop grande sur les petits écrans */
+  height: 50%; /* Maintient la proportion de l'image */
 }
 
 .photo-meta p {
-    font-size: 16px;
-    color: #333;
+  font-size: 14px; /* Réduit la taille de la police pour les plus petits écrans */
 }
+
 
 
 /* Gallerie page principal */
@@ -338,7 +341,11 @@ header {
   gap: 15px;
   width: 50%;
   height: auto;
-  margin: 0 auto; /* Ajouter cette propriété pour centrer horizontalement */
+  margin: 0 auto; /* Centré horizontalement */
+}
+
+.photo-block {
+  position: relative; /* Définit le conteneur pour .overlay */
 }
 
 .photo-block img {
@@ -353,6 +360,63 @@ header {
 .photo-block img.hidden {
   opacity: 0; /* Opacité à 0 pour masquer si nécessaire */
 }
+
+
+/* Media query pour les appareils mobiles (largeur maximale de 1024px) */
+@media (max-width: 1024px) {
+  #photo-container {
+    grid-template-columns: 1fr; /* Passe en une seule colonne */
+    width: calc(100% - 30px); /* Réduit la largeur totale pour inclure les marges */
+    height: auto; /* S'ajuste automatiquement */
+    margin: 0 auto; /* Centre le conteneur */
+    gap: 15px; /* Ajoute un espace de 15px entre les photos */
+  }
+  
+  .photo-block {
+    position: relative; /* Nécessaire pour positionner l'overlay */
+    margin: 0 auto; /* Centre chaque photo individuellement */
+  }
+
+  .photo-block img {
+    width: 317px; /* Largeur ajustée pour mobile */
+    height: 278px; /* Hauteur ajustée pour mobile */
+    display: block; /* Supprime les espaces blancs autour des images */
+  }
+
+  .overlay  {
+    position: absolute !important; /* Toujours absolu */
+    top: 0;
+    left: 0;
+    width: 100% !important; /* Nouvelle largeur spécifique */
+    height: 100% !important; /* Nouvelle hauteur spécifique */
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    display: flex; /* Centrage du contenu */
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Masqué par défaut */
+    transition: opacity 0.3s; /* Animation d'opacité */
+    font-family: 'Space Mono', monospace; /* Police */
+}
+
+.photo-block {
+  position: relative !important;
+  display: inline-block !important;
+  width: 317px !important; 
+  height: 278px !important; 
+  overflow: hidden;
+  font-family: 'Space Mono', monospace;
+}
+.hero-image {
+  width: 100%;
+  height: 20vh !important;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ }
+
 
 
 
@@ -928,7 +992,8 @@ header {
 
 #load-more:hover {
   cursor: pointer; /* Ajout du curseur pointer au survol */
-  background-color: #B8B8B8; /* Optionnel : Changer le fond au survol */
+  background-color: #000000; /* Optionnel : Changer le fond au survol */
+  color: white;
 }
 
 
@@ -1055,3 +1120,168 @@ header {
   top: 10px;
   right: 10px;
 }
+
+
+/* menu burger */
+/* Menu par défaut (desktop) */
+.header-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-menu .menu-container {
+  display: flex; /* Affiche le menu en ligne pour desktop */
+  gap: 20px;
+}
+
+/* Cacher le bouton burger en version desktop */
+.burger-button {
+  display: none;
+}
+
+/* Mobile : ajustements pour le menu burger */
+@media screen and (max-width: 768px) {
+  .menu-container {
+      display: none; /* Cache le menu en mobile */
+      flex-direction: column;
+      background-color: red; /* Fond rouge */
+      color: white !important;          /* Texte blanc */
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      z-index: 999;
+  }
+
+  .menu-container.open {
+      display: flex; /* Affiche le menu en mobile lorsque ouvert */
+  }
+
+  .burger-button {
+      display: flex;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 10px;
+      z-index: 1000;
+  }
+
+  .burger-button span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #fff; /* Couleur du burger */
+      transition: all 0.3s ease;
+  }
+
+  .menu-container a {
+      color: white !important; /* Couleur des liens dans le menu mobile */
+      text-decoration: none;
+      padding: 10px 0;
+  }
+
+  .menu-container a:hover {
+      text-decoration: underline;
+  }
+}
+
+/* Bouton burger */
+.burger-button {
+  display: none; /* Caché en desktop */
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1000;
+  width: 30px;
+  height: 25px;
+  position: relative;
+}
+
+.burger-button span {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: white; /* Couleur des traits */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.burger-button span:nth-child(1) {
+  top: 0;
+}
+
+.burger-button span:nth-child(2) {
+  top: 10px;
+}
+
+.burger-button span:nth-child(3) {
+  top: 20px;
+}
+
+/* État ouvert : les traits forment une croix */
+.burger-button.open span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 10px;
+}
+
+.burger-button.open span:nth-child(2) {
+  opacity: 0; /* Le trait du milieu disparaît */
+}
+
+.burger-button.open span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 10px;
+}
+
+/* Mobile : afficher le bouton burger */
+@media screen and (max-width: 768px) {
+  .burger-button {
+      display: flex;
+  }
+}
+
+
+/* Lightbox*/
+/* Modale Lightbox */
+.lightbox-modal {
+  display: none; /* Cachée par défaut */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Overlay sombre */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenu de la modale */
+.lightbox-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.lightbox-content img {
+  max-width: 40%;
+  max-height: 80%;
+  object-fit: contain; /* Maintient le ratio de l'image */
+}
+
+/* Bouton de fermeture */
+.lightbox-close {
+  position: absolute;
+  top: 25px;
+  right: 50px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+}
+

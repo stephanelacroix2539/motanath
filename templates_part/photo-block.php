@@ -12,12 +12,12 @@ if ($query->have_posts()) :
             <a href="<?php the_permalink(); ?>" class="photo-link">
                 <?php the_post_thumbnail('medium', ['class' => 'photo-thumbnail']); ?>
                 <div class="overlay">
-                <span class="photo-title"><?php echo get_post_meta(get_the_ID(), 'reference', true); ?></span>
+                    <span class="photo-title"><?php the_title(); ?></span>
                     <span class="photo-category">
                         <?php
                         $terms = wp_get_post_terms(get_the_ID(), 'categorie', ['fields' => 'names']);
                         if ($terms) {
-                            echo implode(', ', $terms); // Affiche les noms des catégories comme texte simple
+                            echo implode(', ', $terms);
                         }
                         ?>
                     </span>
@@ -30,7 +30,7 @@ if ($query->have_posts()) :
                 $terms = wp_get_post_terms(get_the_ID(), 'categorie', ['fields' => 'names']);
                 if ($terms) {
                     foreach ($terms as $term) {
-                        echo esc_html($term); // Affiche simplement le nom de la catégorie sans lien
+                        echo esc_html($term);
                     }
                 }
                 ?>
@@ -38,13 +38,8 @@ if ($query->have_posts()) :
         </div>
     <?php endwhile;
 endif;
-wp_reset_postdata();  
-?>
+wp_reset_postdata();
 
-<script type="text/javascript">
-    function openInLightbox(element) {
-        var imageSrc = element.parentElement.previousElementSibling.getAttribute('src'); // Récupère l'URL de l'image
-        var lightboxLink = '<?php echo get_template_directory_uri(); ?>/templates_part/lightbox.php?image=' + encodeURIComponent(imageSrc);
-        window.open(lightboxLink, '_blank');
-    }
-</script>
+// Inclut la structure de la lightbox
+get_template_part('templates_part/lightbox');
+?>

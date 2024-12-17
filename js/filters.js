@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
                 sort_order: sortOrder
             },
             success: function(response) {
-                $('#photo-results').html(response);
+                $('#photo-container').html(response);
             }
         });
     });

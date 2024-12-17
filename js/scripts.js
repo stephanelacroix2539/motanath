@@ -49,18 +49,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// Gestion des filtres // 
-document.querySelectorAll('.filters select').forEach(select => {
-    select.addEventListener('change', function () {
-        const category = document.getElementById('filter-category').value;
-        const format = document.getElementById('filter-format').value;
-        const sortOrder = document.getElementById('sort-order').value;
+// Menu Burger 
+document.addEventListener("DOMContentLoaded", function () {
+    const burgerButton = document.querySelector(".burger-button");
+    const menuContainer = document.querySelector(".menu-container");
 
-        fetch(ajaxurl + '?action=filter_photos&category=' + category + '&format=' + format + '&sort_order=' + sortOrder)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('photo-container').innerHTML = data;
-                document.getElementById('load-more').setAttribute('data-page', 1);
-            });
-    });
+    if (burgerButton && menuContainer) {
+        burgerButton.addEventListener("click", function () {
+            menuContainer.classList.toggle("open");
+        });
+    }
 });
+
+

@@ -30,6 +30,13 @@ function my_theme_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
 
+//lightbox
+function enqueue_lightbox_scripts() {
+    wp_enqueue_script('lightbox-js', get_template_directory_uri() . '/js/lightbox.js', [], null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_lightbox_scripts');
+
+
 
 // Intgration ajax pagination
 
