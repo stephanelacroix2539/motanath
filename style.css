@@ -959,13 +959,31 @@ header {
   border: none;
   top: 3284px;
   left: 584px;
-  padding: 8px 15px;
   gap: 10px;
   border-radius: 2px 0px 0px 0px;
   background: #D8D8D8;
-  box-shadow: 0px 2px 1px 0px #00000005; /* Ajout du box-shadow */
+  box-shadow: 0px 2px 1px 0px #00000005;
   transition: all 0.3s ease;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17.77px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
 }
+
+.bouton-contact:hover {
+  background: #000000;
+  color: #FFFFFF;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17.77px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+
 
 
 
@@ -1281,9 +1299,23 @@ header {
   margin-top: 15px;
   text-align: center;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 14px;
+  font-family: Poppins;
+  font-weight: 500;
+  line-height: 21px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  text-transform: uppercase; /* Le texte sera affiché en majuscules */
 }
 
+
+.lightbox-title {
+  display: none;
+}
+
+.photo-category {
+  margin-left: 700px;
+}
 /* Boutons de navigation */
 
 
@@ -1296,20 +1328,35 @@ header {
 }
 
 .lightbox-nav-prev {
-    left: 0;
+    margin-left: 20px;
 }
 
-.lightbox-nav-next {
-    right: 0;
+#next-image {
+  position: relative; /* Nécessaire pour permettre le décalage */
+  left: 35px; /* Décale l'élément de 35px vers la droite */
+  transition: all 0.3s ease; /* Ajout d'une transition pour l'effet */
 }
+
+#prev-image {
+  position: relative; /* Nécessaire pour permettre le décalage */
+  right: 35px; /* Décale l'élément de 35px vers la droite */
+  transition: all 0.3s ease; /* Ajout d'une transition pour l'effet */
+}
+
+#next-image:hover, #prev-image:hover {
+  font-weight: bold; /* Fait passer l'élément en gras */
+  transform: scale(1.2); /* Allonge la flèche */
+}
+
+
 
 
 
 /* Bouton de fermeture */
 .lightbox-close {
   position: absolute;
-  top: 20px;
-  right: 30px;
+  top: 50px;
+  right: 150px;
   font-size: 2rem;
   color: white;
   cursor: pointer;

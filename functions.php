@@ -73,10 +73,28 @@ function load_more_photos() {
                     <?php the_post_thumbnail('medium', ['class' => 'photo-thumbnail']); ?>
                     <div class="overlay">
                         <span class="photo-title"><?php the_title(); ?></span>
-                        <span class="photo-category"><?php the_terms(get_the_ID(), 'photo_category'); ?></span>
+                        <span class="photo-category">
+                            <?php
+                            $terms = wp_get_post_terms(get_the_ID(), 'categorie', ['fields' => 'names']);
+                            if ($terms) {
+                                echo implode(', ', $terms);
+                            }
+                            ?>
+                        </span>
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_eye.png" alt="Voir plus" class="icon-eye">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_fullscreen.png" alt="Full screen" class="icon-fullscreen" onclick="openInLightbox(this)">
                     </div>
                 </a>
+                <div class="category-badge">
+                    <?php
+                    $terms = wp_get_post_terms(get_the_ID(), 'categorie', ['fields' => 'names']);
+                    if ($terms) {
+                        foreach ($terms as $term) {
+                            echo esc_html($term);
+                        }
+                    }
+                    ?>
+                </div>
             </div>
         <?php endwhile;
     endif;

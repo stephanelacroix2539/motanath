@@ -139,10 +139,45 @@ get_header() ?>
 
             <!-- Conteneur de miniatures individuelles -->
              <!-- Mini slider sélection des images --> 
-	
-			
-	
             <div class="thumbnail-container">
+            <div class="vignette"> <?php
+// Arguments pour la requête pour les articles de type 'photo'
+$args = [
+    'post_type'      => 'photo',
+    'posts_per_page' => 8,
+    'orderby'        => 'rand', // Ordonner aléatoirement
+    'paged'          => 1,
+];
+
+// La requête
+$query = new WP_Query($args);
+
+if ($query->have_posts()) :
+    $random_post_id = null;
+
+    // Sélectionner un post aléatoire
+    $post_ids = [];
+    while ($query->have_posts()) : $query->the_post();
+        $post_ids[] = get_the_ID();
+    endwhile;
+
+    if (!empty($post_ids)) {
+        $random_post_id = $post_ids[array_rand($post_ids)]; // Choisir un ID aléatoire
+    }
+
+    wp_reset_postdata();
+
+    if ($random_post_id) :
+        // Créer un lien cliquable pour la vignette
+        echo '<a href="' . get_permalink($random_post_id) . '" class="random-photo-link">';
+        echo get_the_post_thumbnail($random_post_id, [77, 60]); // 77 et 60 sont les dimensions de la vignette
+        echo '</a>';
+    endif;
+endif;
+?>
+</div>
+
+        </div>
                 <div class="thumbnail-wrapper">
                     <!-- Initialement, le contenu de la miniature sera vide -->
                 </div>

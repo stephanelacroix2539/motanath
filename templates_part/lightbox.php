@@ -1,10 +1,15 @@
 <!-- Modale Lightbox -->
 <div id="lightbox-modal" class="lightbox-modal">
+<span id="prev-image" class="lightbox-nav-btn">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-left.png" alt="Précédent">
+</span>
+           
+    
     <div class="lightbox-content">
+ 
         <img id="lightbox-image" src="" alt="Image en plein écran">
         <div class="lightbox-info">
         
-        <span class="photo-reference">
         <span class="photo-reference">
     <?php
     // Récupérer la valeur du champ 'reference' dans le groupe de champs 'photos'
@@ -36,15 +41,14 @@ function update_photo_reference($post_id) {
                         ?>
                     </span>
             <span id="lightbox-title" class="lightbox-title"></span>
-            <div class="lightbox-navigation">
-                <span id="prev-image" class="lightbox-nav-btn">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-left.png" alt="Précédent">
-</span>
-                <span id="next-image" class="lightbox-nav-btn">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right.png" alt="Suivant">
-</span>
-            </div>
         </div>
     </div>
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <span class="lightbox-close" onclick="closeLightbox()">
+    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/close.png" alt="Close">
+</span>
+
+
+    <span id="next-image" class="lightbox-nav-btn">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right.png" alt="Suivant">
+</span>
 </div>
