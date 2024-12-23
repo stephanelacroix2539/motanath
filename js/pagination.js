@@ -1,5 +1,6 @@
 
 /* Script de la pagination */
+
 jQuery(document).ready(function($) {
     var page = 1;
     var loading = false;
@@ -20,8 +21,12 @@ jQuery(document).ready(function($) {
             success: function(response) {
                 if (response) {
                     $('#photo-container').append(response);
+
+                    // Cacher le bouton après l'affichage des résultats
+                    $('#load-more').hide();
                 } else {
-                    $('#load-more').hide(); // Pas plus de photos à charger
+                    // Pas plus de photos à charger
+                    $('#load-more').hide();
                 }
                 loading = false;
             }

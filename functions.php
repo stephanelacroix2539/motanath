@@ -36,6 +36,11 @@ function enqueue_lightbox_scripts() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_lightbox_scripts');
 
+// Burger
+function enqueue_burger_menu_scripts() {
+    wp_enqueue_script('burger', get_stylesheet_directory_uri() . '/js/burger.js', [], null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_burger_menu_scripts');
 
 
 // Intgration ajax pagination

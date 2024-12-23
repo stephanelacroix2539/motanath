@@ -88,20 +88,10 @@ get_header() ?>
                 <p>Cette photo vous intéresse ?</p>
             </div>
 			
-            <div class="bouton-contact">
-			<button class="bouton-contact" data-reference="<?= $refPhoto ?>">Contact</button></p>
-                <?php include get_template_directory() . '/templates_part/modal-contact.php'; ?>
+            <div class="bouton-contact-container">
+    <button class="bouton-contact" id="openModal">Contact</button>
+</div>
 
-                <?php
-                // Récupère la valeur du champ personnalisé 'reference_photo' et la définit comme une variable JavaScript.
-                $reference_photo = get_field('reference_photo');
-                if ($reference_photo) {
-                    echo '<script type="text/javascript">';
-                    echo 'var acfReferencePhoto = "' . esc_js($reference_photo) . '";';
-                    echo '</script>';
-                }
-                ?>
-            </div>
         </div>
         <!-- Contact - Navigation de photos - Fleches & Miniature -->
         <div class="right-contact">
@@ -170,7 +160,7 @@ if ($query->have_posts()) :
     if ($random_post_id) :
         // Créer un lien cliquable pour la vignette
         echo '<a href="' . get_permalink($random_post_id) . '" class="random-photo-link">';
-        echo get_the_post_thumbnail($random_post_id, [77, 60]); // 77 et 60 sont les dimensions de la vignette
+        echo get_the_post_thumbnail($random_post_id, [81, 70]); // 77 et 60 sont les dimensions de la vignette
         echo '</a>';
     endif;
 endif;

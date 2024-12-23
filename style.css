@@ -48,10 +48,15 @@ body {
     background-color: #ffffff;
 }
 
+main {
+  padding: 0 !important;
+}
+
+
 /* Header - en-Tête */
 header {
     position: relative;
-    top: -90;
+    top: 0;
     left: 0;
     right: 0;
     height: 80px;
@@ -87,6 +92,7 @@ header {
     justify-content: space-between; /* Distribution uniforme */
     padding: 0;
     width: 30%; /* Optionnel si vous voulez occuper tout l'espace */
+    margin-right: 250px;
 }
 
 
@@ -1140,126 +1146,178 @@ header {
 }
 
 
-/* menu burger */
-/* Menu par défaut (desktop) */
-.header-menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+/* menu burger - Général */
 
-.header-menu .menu-container {
-  display: flex; /* Affiche le menu en ligne pour desktop */
-  gap: 20px;
-}
-
-/* Cacher le bouton burger en version desktop */
-.burger-button {
+.mobile-menu-button {
   display: none;
-}
-
-/* Mobile : ajustements pour le menu burger */
-@media screen and (max-width: 768px) {
-  .menu-container {
-      display: none; /* Cache le menu en mobile */
-      flex-direction: column;
-      background-color: red; /* Fond rouge */
-      color: white !important;          /* Texte blanc */
-      position: absolute;
-      top: 50px;
-      left: 0;
-      width: 100%;
-      padding: 20px;
-      z-index: 999;
-  }
-
-  .menu-container.open {
-      display: flex; /* Affiche le menu en mobile lorsque ouvert */
-  }
-
-  .burger-button {
-      display: flex;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-      padding: 10px;
-      z-index: 1000;
-  }
-
-  .burger-button span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background-color: #fff; /* Couleur du burger */
-      transition: all 0.3s ease;
-  }
-
-  .menu-container a {
-      color: white !important; /* Couleur des liens dans le menu mobile */
-      text-decoration: none;
-      padding: 10px 0;
-  }
-
-  .menu-container a:hover {
-      text-decoration: underline;
-  }
-}
-
-/* Bouton burger */
-.burger-button {
-  display: none; /* Caché en desktop */
   cursor: pointer;
-  flex-direction: column;
-  gap: 5px;
-  z-index: 1000;
-  width: 30px;
-  height: 25px;
-  position: relative;
+  padding: 10px;
 }
 
-.burger-button span {
+.bar {
   display: block;
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background-color: white; /* Couleur des traits */
-  border-radius: 2px;
-  transition: all 0.3s ease;
+  width: 27.42px;
+  height: 2px;
+  margin: 5px auto;
+  background-color: #000;
+  transition: 0.4s;
 }
 
-.burger-button span:nth-child(1) {
-  top: 0;
-}
+/* Menu burger version mobile */
+@media (max-width: 768px) {
+  .mobile-menu-button {
+      display: block;
+  }
 
-.burger-button span:nth-child(2) {
-  top: 10px;
-}
+  .header-menu {
+      display: none;
+  }
 
-.burger-button span:nth-child(3) {
-  top: 20px;
-}
-
-/* État ouvert : les traits forment une croix */
-.burger-button.open span:nth-child(1) {
-  transform: rotate(45deg);
-  top: 10px;
-}
-
-.burger-button.open span:nth-child(2) {
-  opacity: 0; /* Le trait du milieu disparaît */
-}
-
-.burger-button.open span:nth-child(3) {
-  transform: rotate(-45deg);
-  top: 10px;
-}
-
-/* Mobile : afficher le bouton burger */
-@media screen and (max-width: 768px) {
-  .burger-button {
+  .mobile-menu-opened .header-menu {
       display: flex;
+      flex-direction: column; 
+      align-items: center;
+      background-color: #fff;
+      position: fixed;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px;
+      box-shadow: 0px 4px 14px 10px #00000008;
+      z-index: 1000;
+      overflow-y: auto;
+  }
+
+  .close-button {
+      position: absolute;
+      font-family: "Space Mono", monospace;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #000;
+  }
+
+  .close-button-container {
+      width: 100%;
+      height: 86px;
+      background: white;
+      position: absolute;
+      top: 0;
+  }
+  
+  .header-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+  }
+
+  .footer-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      text-align: center;
+      flex-flow: column;
+  }
+
+   
+  .mobile-menu-opened .header-menu {
+      background: #E00000;
+      width: 375px;
+      height: 812px;
+      left: 0;
+      top: 50px;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-y: auto;
+  }
+  .header-menu li a,
+  #open-modal-button-header {
+      font-family: 'Space Mono';
+      font-weight: 400;
+      font-size: 44px;
+      line-height: 65px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      transition: font-weight 0.3s ease;
+  }
+
+  .header-menu li {
+  margin-right: -3px;
+  }
+
+  .header-menu li a:hover,
+  #open-modal-button-header:hover {
+      font-size: 44px;
+      font-weight: 600;
+  }
+
+  .close-button {
+      color: #000000;
+      font-size: 23px;
+      position: absolute;
+      top: 22px;
+      right: 30px;
+  }
+
+  body.mobile-menu-opened {
+      background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .header-menu li {
+      margin-bottom: 20px;
+  }
+
+  .logo-container {
+      display: block;
+      margin-left: 30px;
+  }
+
+  .close-button {
+      display: block;
   }
 }
+
+@media (min-width: 768px) {
+  .logo-container {
+      display: none;
+  }
+
+  .close-button {
+      display: none;
+  }
+}
+
+
+/* MODÈLE - ARTICLE */
+
+main {
+  padding: 20px;
+  font-family: 'Space Mono';
+}
+
+.main-content-post {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
 
 
 /* Lightbox*/

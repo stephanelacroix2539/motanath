@@ -14,6 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    //ouvrir la modale depuis le bouton single
+      // Ouvrir la modale
+      openModal.addEventListener('click', function () {
+        modal.style.display = 'flex'; // Passe de `none` à `flex` pour afficher la modale
+    });
+
     // Fermer la modale avec le bouton de fermeture
     closeModal.addEventListener('click', () => {
         modal.style.display = 'none';
@@ -49,16 +55,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// Menu Burger 
-document.addEventListener("DOMContentLoaded", function () {
-    const burgerButton = document.querySelector(".burger-button");
-    const menuContainer = document.querySelector(".menu-container");
-
-    if (burgerButton && menuContainer) {
-        burgerButton.addEventListener("click", function () {
-            menuContainer.classList.toggle("open");
-        });
-    }
-});
 
 
