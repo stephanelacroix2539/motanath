@@ -54,6 +54,27 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// overlay menu burger //
+// Récupérer les éléments nécessaires
+const menuButton = document.getElementById('open-fullscreen-menu-button');
+const closeButton = document.getElementById('close-fullscreen-menu-button');
+const overlay = document.querySelector('.overlay');
+const body = document.body;
+
+// Ouvrir le menu et afficher l'overlay
+menuButton.addEventListener('click', function () {
+    body.classList.add('menu-opened'); // Active l'overlay
+});
+
+// Fermer le menu et cacher l'overlay
+closeButton.addEventListener('click', function () {
+    body.classList.remove('menu-opened'); // Désactive l'overlay
+});
+
+// Fermer le menu si on clique sur l'overlay
+overlay.addEventListener('click', function () {
+    body.classList.remove('menu-opened'); // Désactive l'overlay
+});
 
 
 

@@ -9,6 +9,7 @@
     <?php wp_head(); ?>
 </head>
 <body>
+<div class="overlay"></div>
     <!-- Section d'en-tête -->
     <header>
         <!-- Logo de l'en-tête -->
@@ -31,6 +32,7 @@
         
         <!-- Menu de l'en-tête -->
         <nav class="header-menu">
+        
             <div class="close-button-container">
                 <!-- Conteneur du logo -->
                 <div class="logo-container">
@@ -55,6 +57,7 @@
                 ]);
                 ?>
             </div>
+        
         </nav>
     </header>
 </body>

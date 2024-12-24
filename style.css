@@ -1157,7 +1157,7 @@ header {
 .bar {
   display: block;
   width: 27.42px;
-  height: 2px;
+  height: 3px;
   margin: 5px auto;
   background-color: #000;
   transition: 0.4s;
@@ -1169,6 +1169,12 @@ header {
       display: block;
   }
 
+  .header-logo img {
+    width: 195px;
+    height: 14px;
+    margin-left: 16%;
+}
+
   .header-menu {
       display: none;
   }
@@ -1178,7 +1184,6 @@ header {
       flex-direction: column; 
       align-items: center;
       background-color: #fff;
-      position: fixed;
       position: fixed;
       top: 0;
       left: 0;
@@ -1190,21 +1195,24 @@ header {
       overflow-y: auto;
   }
 
+  .header-menu li a:hover {
+    font-weight: 400 !important; /* Assure que le poids reste constant au survol */
+}
+
   .close-button {
-      position: absolute;
-      font-family: "Space Mono", monospace;
-      top: 10px;
-      right: 10px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      color: #000;
-  }
+    color: #000000;
+    font-size: 23px;
+    position: absolute;
+    top: 29px;
+    right: 21px;
+    border: none;
+    background: white;
+    cursor: pointer; 
+}
 
   .close-button-container {
       width: 100%;
-      height: 86px;
+      height: 77px;
       background: white;
       position: absolute;
       top: 0;
@@ -1256,18 +1264,12 @@ header {
       text-transform: uppercase;
       color: #FFFFFF;
       margin-bottom: 20px;
-      transition: font-weight 0.3s ease;
   }
 
   .header-menu li {
   margin-right: -3px;
   }
 
-  .header-menu li a:hover,
-  #open-modal-button-header:hover {
-      font-size: 44px;
-      font-weight: 600;
-  }
 
   .close-button {
       color: #000000;
@@ -1304,6 +1306,18 @@ header {
       display: none;
   }
 }
+
+/*Overlay Menu Burger */
+/* Lorsque le menu est ouvert */
+body.menu-opened .overlay {
+  opacity: 1;
+  pointer-events: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 3500px !important;
+}
+
+
+
 
 
 /* MODÈLE - ARTICLE */
