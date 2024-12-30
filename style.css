@@ -46,12 +46,15 @@ h3 {
 body {
     margin-top: 0px;
     background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
 main {
   padding: 0 !important;
 }
-
 
 /* Header - en-Tête */
 header {
@@ -483,8 +486,13 @@ header {
 
 /* Style pour les options survolées dans Select2 */
 .select2-results__option--highlighted {
-  background-color: red !important; /* Fond rouge au survol */
-  color: white !important; /* Texte blanc */
+  background-color: #FFD6D6 !important; 
+  color: rgb(3, 3, 3) !important; 
+}
+/* État actif ou sélectionné */
+.select2-selection:focus {
+  background-color: red; /* Fond rouge après clic ou focus */
+  color: white; /* Texte blanc pour contraster avec le fond rouge */
 }
 
 /* Couleur par défaut des options dans la liste déroulante */
@@ -504,6 +512,53 @@ header {
 .select2-selection:hover {
   background-color: rgb(255, 255, 255); 
 }
+
+
+
+#sort-order + .select2-container {
+  position: relative;
+  width: 260px !important;
+  height: 42px !important;
+  left: 270px; /* Ajustez la valeur pour déplacer à droite */
+}
+
+#filter-format + .select2-container {
+  width: 260px !important;
+  height: 42px !important;
+}
+
+#filter-category + .select2-container {
+  width: 260px !important;
+  height: 42px !important;
+}
+
+/* filtres mobiles */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column; /* Les éléments s'empilent verticalement */
+    width: 100%; /* Prend toute la largeur */
+    margin: auto; /* Centre le conteneur */
+    padding: 20px 0; /* Réduit l'espacement */
+    gap: 15px; /* Espacement entre les éléments */
+    align-items: center; /* Centre les éléments dans la colonne */
+  }
+
+  .filters select {
+    width: 90%; /* Les champs prennent presque toute la largeur */
+    max-width: 300px; /* Limite la largeur des champs */
+    margin: auto; /* Centre les champs */
+  }
+
+  #filter-category,
+  #filter-format,
+  #sort-order + .select2-container  {
+    margin-left: 0; /* Supprime les marges */
+    margin-right: 0 !important; /* Supprime les marges */
+    left:0;
+  }
+  }
+
+
 
 
 
@@ -786,32 +841,46 @@ header {
     transform: scale(1.2);
 }
 
-/* Conteneur des miniatures */
 .thumbnail-container {
-    text-align: center; 
-    width: 80px;
-    height: 80px; 
+  text-align: center; 
+  width: 80px;
+  height: auto; /* Permet à la hauteur de s'ajuster dynamiquement */
+}
+
+.thumbnail-wrapper {
+  display: flex;
+  flex-direction: column; /* Empile les éléments verticalement */
+  align-items: center; /* Centre les éléments horizontalement */
+  gap: 10px; /* Espace uniforme entre l'image et les flèches */
 }
 
 /* Images des miniatures */
 .thumbnail-container img {
-    max-width: 100%; 
-    max-height: 100%;
+  max-width: 100%; 
+  max-height: 100%;
+  display: block; /* S'assure que l'image prend sa propre ligne */
 }
 
 /* Image de la flèche gauche des miniatures */
 .thumbnail-container img.arrow-img-gauche {
-    display: block;
-    margin-right: 7px;
-    margin-top: 10px;
+  margin-right: 0; /* Supprime le décalage horizontal */
+  margin-top: 0; /* Supprime le décalage vertical */
 }
 
 /* Image de la flèche droite des miniatures */
 .thumbnail-container img.arrow-img-droite {
-    display: block;
-    margin-top: -8px;
-    margin-left: 54px;
+  margin-left: 0; /* Supprime le décalage horizontal */
+  margin-top: 0; /* Supprime le décalage vertical */
 }
+
+/* Conteneur des flèches */
+.thumbnail-arrows {
+  display: flex;
+  justify-content: space-between; /* Positionne les flèches à égale distance */
+  width: 100%; /* Étend le conteneur pour correspondre à la largeur de l'image */
+  margin-top: 10px; /* Ajoute un espace au-dessus des flèches */
+}
+
 
 /* Section des images liées */
 .related-images {
@@ -1179,21 +1248,75 @@ header {
       display: none;
   }
 
-  .mobile-menu-opened .header-menu {
-      display: flex;
-      flex-direction: column; 
+ /* Menu burger version mobile */
+@media (max-width: 768px) {
+  .mobile-menu-button {
+      display: block;
+  }
+
+  .header-menu {
+      display: none;
+      flex-direction: column;
       align-items: center;
       background-color: #fff;
       position: fixed;
       top: 0;
-      left: 0;
+      left: 100%; /* Commence en dehors de l'écran */
       right: 0;
       bottom: 0;
       padding: 10px;
       box-shadow: 0px 4px 14px 10px #00000008;
       z-index: 1000;
       overflow-y: auto;
+      width: 100%; /* Pour s'assurer qu'il occupe toute la largeur */
   }
+
+  /* Lorsque le menu est ouvert */
+  .mobile-menu-opened .header-menu {
+      display: flex;
+      animation: slideIn 0.4s forwards;
+  }
+
+  /* Animation pour faire apparaître le menu */
+  @keyframes slideIn {
+      from {
+          transform: translateX(100%); /* Hors de l'écran à droite */
+      }
+      to {
+          transform: translateX(0); /* Position finale */
+      }
+  }
+
+  /* Animation pour masquer le menu */
+  .mobile-menu-closed .header-menu {
+      animation: slideOut 0.4s forwards;
+  }
+
+  @keyframes slideOut {
+      from {
+          transform: translateX(0); /* Position visible */
+      }
+      to {
+          transform: translateX(100%); /* Glisse hors de l'écran */
+      }
+  }
+
+  .close-button {
+      color: #000000;
+      font-size: 23px;
+      position: absolute;
+      top: 22px;
+      right: 30px;
+      cursor: pointer;
+      background: none;
+      border: none;
+  }
+
+  body.mobile-menu-opened {
+      background: rgba(0, 0, 0, 0.5);
+  }
+}
+
 
   .header-menu li a:hover {
     font-weight: 400 !important; /* Assure que le poids reste constant au survol */

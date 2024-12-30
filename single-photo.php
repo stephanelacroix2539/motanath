@@ -89,7 +89,8 @@ get_header() ?>
             </div>
 			
             <div class="bouton-contact-container">
-    <button class="bouton-contact" id="openModal">Contact</button>
+            <button class="bouton-contact" id="openModal" data-reference="<?php echo esc_attr($reference_photo); ?>">Contact</button>
+
 </div>
 
         </div>
@@ -130,7 +131,12 @@ get_header() ?>
             <!-- Conteneur de miniatures individuelles -->
              <!-- Mini slider sélection des images --> 
             <div class="thumbnail-container">
-            <div class="vignette"> <?php
+            <div class="vignette">
+</div>
+
+        </div>
+                <div class="thumbnail-wrapper">
+<?php
 // Arguments pour la requête pour les articles de type 'photo'
 $args = [
     'post_type'      => 'photo',
@@ -164,19 +170,14 @@ if ($query->have_posts()) :
         echo '</a>';
     endif;
 endif;
-?>
-</div>
+?>  <div class="thumbnail-arrows">
 
-        </div>
-                <div class="thumbnail-wrapper">
-                    <!-- Initialement, le contenu de la miniature sera vide -->
-                </div>
                 <a href="<?php echo esc_url($prev_permalink); ?>" class="arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($prev_post, 'thumbnail')); ?>" id="prev-arrow-link">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fleche-gauche.png" alt="Précédent" class="arrow-img-gauche" id="prev-arrow" />
                 </a>
                 <a href="<?php echo esc_url($next_permalink); ?>" class="arrow-link" data-thumbnail="<?php echo esc_url(get_the_post_thumbnail_url($next_post, 'thumbnail')); ?>" id="next-arrow-link">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/fleche-droite.png" alt="Suivant" class="arrow-img-droite" id="next-arrow" />
-                </a>
+                </a></div></div>
             </div>
         </div>
     </div>
@@ -210,7 +211,6 @@ endif;
                         <?php if (has_post_thumbnail()) : ?>
                             <div class="image-wrapper">
                                 <?php the_post_thumbnail(); ?>
-                                <!-- Section | Overlay Catalogue -->
                                 <div class="">
                                    
                                     <i class="fas fa-expand-arrows-alt fullscreen-icon"></i><!-- Icône plein écran -->
