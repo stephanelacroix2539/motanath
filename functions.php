@@ -87,7 +87,7 @@ function load_more_photos() {
                             ?>
                         </span>
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_eye.png" alt="Voir plus" class="icon-eye">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_fullscreen.png" alt="Full screen" class="icon-fullscreen" onclick="openInLightbox(this)">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_fullscreen.png" alt="Full screen" class="icon-fullscreen">
                     </div>
                 </a>
                 <div class="category-badge">

@@ -531,8 +531,54 @@ header {
   width: 260px !important;
   height: 42px !important;
 }
+/* Filtres : Survol rose, clique rouge */
+
+.select2-results__option--highlighted {
+  background-color: pink !important; /* Rose lors du survol */
+  color: rgb(3, 3, 3) !important; 
+}
+
+/* État actif ou sélectionné (clic ou focus) */
+.select2-results__option--highlighted:focus,
+.select2-results__option--highlighted:active
+{
+  background-color: red !important; /* Rouge après clic ou focus */
+  color: white !important; /* Texte blanc pour contraster */
+}
+
+.select2-results__option--selected {
+  background-color: #E00000!important;
+  color:#FFF !important;
+}
+
 
 /* filtres mobiles */
+@media (max-width: 1230px) {
+  .filters {
+    flex-direction: column; /* Les éléments s'empilent verticalement */
+    width: 80%; /* Prend toute la largeur */
+    margin: auto; /* Centre le conteneur */
+    padding: 20px 0; /* Réduit l'espacement */
+    gap: 15px; /* Espacement entre les éléments */
+    align-items: center; /* Centre les éléments dans la colonne */
+  }
+
+  .filters select {
+    width: 90%; /* Les champs prennent presque toute la largeur */
+    max-width: 300px; /* Limite la largeur des champs */
+    margin: auto; /* Centre les champs */
+  }
+
+  #filter-category,
+  #filter-format,
+  #sort-order + .select2-container  {
+    margin-left: 0; /* Supprime les marges */
+    margin-right: 0 !important; /* Supprime les marges */
+    left:0;
+  }
+  }
+
+
 @media (max-width: 768px) {
   .filters {
     flex-direction: column; /* Les éléments s'empilent verticalement */
@@ -1125,18 +1171,19 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 94%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s;
+  
   font-family: 'Space Mono', monospace; /* Police monospace */
 }
 
 .photo-block:hover .overlay {
   opacity: 1;
+  height: 100%;
 }
 
 .overlay .icon-eye {
@@ -1457,8 +1504,8 @@ main {
 
 
 
-/* Lightbox*/
-/* Modale Lightbox */
+/* lightbox*/
+/* Modale lightbox */
 .lightbox-modal {
   display: none; /* Cachée par défaut */
   position: fixed;
@@ -1526,22 +1573,60 @@ main {
     margin-left: 20px;
 }
 
+
 #next-image {
   position: relative; /* Nécessaire pour permettre le décalage */
-  left: 35px; /* Décale l'élément de 35px vers la droite */
-  transition: all 0.3s ease; /* Ajout d'une transition pour l'effet */
+  left: 20px; /* Décale l'élément de 35px vers la droite */
+  filter: brightness(0) invert(1); /* Rend l'image blanche */
 }
+/* Masquer toutes les images par défaut */
+.lightbox-nav-btn img {
+  display: none;
+}
+
+/* Afficher l'image de base (suiv1) */
+.lightbox-nav-btn .suiv1 {
+  display: block;
+}
+
+/* Afficher l'image suivante (suiv2) lors du survol */
+.lightbox-nav-btn:hover .suiv1 {
+  display: none;
+}
+
+.lightbox-nav-btn:hover .suiv2 {
+  display: block;
+}
+
+
 
 #prev-image {
-  position: relative; /* Nécessaire pour permettre le décalage */
-  right: 35px; /* Décale l'élément de 35px vers la droite */
-  transition: all 0.3s ease; /* Ajout d'une transition pour l'effet */
+  position: relative; 
+  right: 20px; 
+  filter: brightness(0) invert(1);
+}
+/* Masquer toutes les images par défaut */
+.lightbox-nav-btn img {
+  display: none;
 }
 
-#next-image:hover, #prev-image:hover {
-  font-weight: bold; /* Fait passer l'élément en gras */
-  transform: scale(1.2); /* Allonge la flèche */
+/* Afficher l'image de base (prec1) */
+.lightbox-nav-btn .prec1 {
+  display: block;
 }
+
+/* Afficher l'image suivante (prec2) lors du survol */
+.lightbox-nav-btn:hover .prec1 {
+  display: none;
+}
+
+.lightbox-nav-btn:hover .prec2 {
+  display: block;
+}
+
+
+
+
 
 
 

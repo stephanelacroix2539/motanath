@@ -30,10 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Ouvrir la lightbox avec une image
     function openInLightbox(index) {
+        console.log('essai reussi');
         currentImageIndex = index;
         lightboxImage.src = images[currentImageIndex].src;
         lightboxTitle.textContent = images[currentImageIndex].title;
         lightboxModal.style.display = "flex";
+        
     }
 
     // Fermer la lightbox

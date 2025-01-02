@@ -1,7 +1,8 @@
 <!-- Modale Lightbox -->
 <div id="lightbox-modal" class="lightbox-modal">
 <span id="prev-image" class="lightbox-nav-btn">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-left.png" alt="Précédent">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/precedente.svg" alt="Précédent" class="prec1">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/precedente2.svg" alt="Précédente2" class="prec2">
 </span>
            
     
@@ -48,7 +49,11 @@ function update_photo_reference($post_id) {
 </span>
 
 
-    <span id="next-image" class="lightbox-nav-btn">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow-right.png" alt="Suivant">
+<span id="next-image" class="lightbox-nav-btn">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/suivante.svg" alt="Suivant" class="suiv1">
+    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/suivante2.svg" alt="Suivant2" class="suiv2">
 </span>
+
+
+
 </div>

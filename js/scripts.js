@@ -47,13 +47,15 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('contactModal').style.display = 'block';
 
             // Préremplir le champ de référence dans la popup
-            const referenceInput = document.querySelector('[name="ref-photo"]');
+            const referenceInput = document.querySelector('[name="your-subject"]');
             if (referenceInput) {
                 referenceInput.value = reference;
             }
         });
     }
 });
+
+
 
 
 // overlay menu burger //
