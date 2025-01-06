@@ -977,6 +977,60 @@ header {
     object-fit: cover;
 }
 
+/*single-page related photo icon */
+
+/* Wrapper principal pour les images */
+.related-image {
+  position: relative;
+  display: inline-block;
+  cursor: pointer; /* Pour indiquer que l'image est cliquable */
+}
+
+/* Icônes masquées par défaut */
+.related-image .icon-eye,
+.related-image .icon-fullscreen {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none; /* Désactive l'interaction quand l'icône est cachée */
+}
+
+/* Afficher les icônes au survol de l'image */
+.related-image:hover .icon-eye,
+.related-image:hover .icon-fullscreen {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important; /* Réactive l'interaction lorsque l'icône est visible */
+}
+
+/* Icône de l'œil au centre de l'image */
+.related-image .icon-eye {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background: url('./assets/images/icon_eye.png') no-repeat center center;
+  background-size: contain;
+  z-index: 10;
+}
+
+/* Icône de plein écran en haut à droite */
+.related-image .icon-fullscreen {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background: url('./assets/images/icon_fullscreen.png') no-repeat center center;
+  background-size: contain;
+  z-index: 10;
+}
+
+
+
+
 /* Styles pour les écrans de largeur inférieure à 768 pixels */
 
 @media (max-width: 768px) {
@@ -1412,10 +1466,10 @@ header {
    
   .mobile-menu-opened .header-menu {
       background: #E00000;
-      width: 375px;
+      width: 100%;
       height: 812px;
       left: 0;
-      top: 50px;
+      top: 0px;
       position: fixed;
       display: flex;
       flex-direction: column;
@@ -1555,7 +1609,7 @@ main {
   display: none;
 }
 
-.photo-category {
+.photo-category-lightbox {
   margin-left: 700px;
 }
 /* Boutons de navigation */
@@ -1598,8 +1652,6 @@ main {
   display: block;
 }
 
-
-
 #prev-image {
   position: relative; 
   right: 20px; 
@@ -1624,14 +1676,6 @@ main {
   display: block;
 }
 
-
-
-
-
-
-
-
-
 /* Bouton de fermeture */
 .lightbox-close {
   position: absolute;
@@ -1642,3 +1686,5 @@ main {
   cursor: pointer;
   z-index: 1001;
 }
+
+

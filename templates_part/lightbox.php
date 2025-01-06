@@ -33,7 +33,7 @@ function update_photo_reference($post_id) {
 
 
 
-        <span class="photo-category">
+        <span class="photo-category-lightbox">
                         <?php
                         $terms = wp_get_post_terms(get_the_ID(), 'categorie', ['fields' => 'names']);
                         if ($terms) {

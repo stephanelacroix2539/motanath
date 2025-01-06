@@ -39,21 +39,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Popup Contact préremplie avec jQuery //
 document.addEventListener('DOMContentLoaded', function () {
-    const contactButton = document.getElementById('button-contact');
+    // Bouton d'ouverture de la modale
+    const openModalButton = document.getElementById('openModal');
+    const modal = document.getElementById('contactModal');
+    const closeModalButton = document.getElementById('closeModal');
 
-    if (contactButton) {
-        contactButton.addEventListener('click', function () {
-            const reference = this.getAttribute('data-reference');
-            document.getElementById('contactModal').style.display = 'block';
+    // Ouvrir la modale avec la référence
+    openModalButton.addEventListener('click', function () {
+        const reference = openModalButton.getAttribute('data-reference');
 
-            // Préremplir le champ de référence dans la popup
-            const referenceInput = document.querySelector('[name="your-subject"]');
-            if (referenceInput) {
-                referenceInput.value = reference;
-            }
-        });
-    }
+        // Afficher la modale
+        modal.style.display = 'block';
+
+        // Préremplir le champ "Réf. Photo" dans Contact Form 7
+        const subjectField = document.querySelector('input[name="your-subject"]');
+        if (subjectField) {
+            subjectField.value = reference;
+        }
+    });
+
+    // Fermer la modale
+    closeModalButton.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    // Fermer la modale en cliquant en dehors du contenu
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
 });
+
+
 
 
 

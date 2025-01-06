@@ -206,39 +206,44 @@ endif;
             while ($related_photos_query->have_posts()) :
                 $related_photos_query->the_post();
             ?>
-                <div class="related-image">
-                    <a href="<?php the_permalink(); ?>">
-                        <?php if (has_post_thumbnail()) : ?>
-                            <div class="image-wrapper">
-                                <?php the_post_thumbnail(); ?>
-                                <div class="">
-                                   
-                                    <i class="fas fa-expand-arrows-alt fullscreen-icon"></i><!-- Icône plein écran -->
-                                    <?php
-                                    // Récupère la référence et la catégorie de l'image associée.
-                                    $related_reference_photo = get_field('reference_photo');
-                                    $related_categories = get_the_terms(get_the_ID(), 'categorie');
-                                    $related_category_names = array();
+             <div class="related-image">
+    <a href="<?php the_permalink(); ?>">
+        <?php if (has_post_thumbnail()) : ?>
+            <div class="image-wrapper">
+                <?php the_post_thumbnail(); ?>
+                
+                <!-- Icône de l'œil au centre de l'image -->
+                <a href="<?php the_permalink(); ?>" class="icon-eye"></a>
+                
+                <!-- Icône de plein écran en haut à droite -->
+                <a href="lightbox.php?id=<?php echo get_the_ID(); ?>" class="icon-fullscreen"></a>
 
-                                    if ($related_categories) {
-                                        foreach ($related_categories as $category) {
-                                            $related_category_names[] = esc_html($category->name);
-                                        }
-                                    }
-                                    ?>
-                                    <div class="photo-info">
-									<div class="photo-info-left">
-                                            <p><?php echo esc_html($related_reference_photo); ?></p>
-                                        </div>
-                                        <div class="photo-info-right">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    </a>
+                <div class="">
+                    <?php
+                    // Récupère la référence et la catégorie de l'image associée.
+                    $related_reference_photo = get_field('reference_photo');
+                    $related_categories = get_the_terms(get_the_ID(), 'categorie');
+                    $related_category_names = array();
+
+                    if ($related_categories) {
+                        foreach ($related_categories as $category) {
+                            $related_category_names[] = esc_html($category->name);
+                        }
+                    }
+                    ?>
+                    <div class="photo-info">
+                        <div class="photo-info-left">
+                            <p><?php echo esc_html($related_reference_photo); ?></p>
+                        </div>
+                        <div class="photo-info-right">
+                        </div>
+                    </div>
                 </div>
+            </div>
+        <?php endif; ?>
+    </a>
+</div>
+
             <?php endwhile; ?>
 
             <?php wp_reset_postdata(); // Restaure les données originales des publications ?>

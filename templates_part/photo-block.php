@@ -8,7 +8,7 @@ $query = new WP_Query($args);
 
 if ($query->have_posts()) :
     while ($query->have_posts()) : $query->the_post(); ?>
-        <div class="photo-block">
+        <div class="photo-block" data-reference="<?php echo esc_attr(get_field('reference', get_the_ID())); ?>">
             <a href="<?php the_permalink(); ?>" class="photo-link">
                 <?php the_post_thumbnail('medium', ['class' => 'photo-thumbnail']); ?>
                 <div class="overlay">
