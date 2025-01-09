@@ -75,7 +75,7 @@ get_header() ?>
                 <a data-href="<?php echo wp_get_attachment_image_src(get_post_thumbnail_id(), 'large')[0]; ?>" class="photo">
                     <?php the_post_thumbnail(); ?>
                 </a>
-                <i class="fas fa-expand-arrows-alt fullscreen-icon"></i><!-- Fullscreen icon -->
+                
             <?php endif; ?>
             
         </div>
@@ -184,67 +184,56 @@ endif;
 
     <!-- Section Photos Apparentées -->
     <div class="related-images">
-        <h3>VOUS AIMEREZ AUSSI</h3>
-        <div class="image-container">
-            <?php
-            // Récupère deux photos aléatoires de la même catégorie que la photo actuelle.
-            $args_related_photos = array(
-                'post_type' => 'photo',
-                'posts_per_page' => 2,
-                'orderby' => 'rand',
-                'tax_query' => array(
-                    array(
-                        'taxonomy' => 'categorie',
-                        'field' => 'slug',
-                        'terms' => $current_category_slugs, // Utilise le slug de la catégorie de la photo actuelle
-                    ),
-                ),
-            );
+    <h3>VOUS AIMEREZ AUSSI</h3>
+    <div class="image-container">
+        <?php
+        // Récupère deux photos aléatoires de la même catégorie que la photo actuelle.
+        $args_related_photos = [
+            'post_type'      => 'photo',
+            'posts_per_page' => 2,
+            'orderby'        => 'rand',
+            'tax_query'      => [
+                [
+                    'taxonomy' => 'categorie',
+                    'field'    => 'slug',
+                    'terms'    => $current_category_slugs,
+                ],
+            ],
+        ];
 
-            $related_photos_query = new WP_Query($args_related_photos);
+        $related_photos_query = new WP_Query($args_related_photos);
 
+        if ($related_photos_query->have_posts()) :
             while ($related_photos_query->have_posts()) :
                 $related_photos_query->the_post();
-            ?>
-             <div class="related-image">
-    <a href="<?php the_permalink(); ?>">
-        <?php if (has_post_thumbnail()) : ?>
-            <div class="image-wrapper">
-                <?php the_post_thumbnail(); ?>
-                
-                <!-- Icône de l'œil au centre de l'image -->
-                <a href="<?php the_permalink(); ?>" class="icon-eye"></a>
-                
-                <!-- Icône de plein écran en haut à droite -->
-                <a href="lightbox.php?id=<?php echo get_the_ID(); ?>" class="icon-fullscreen"></a>
-
-                <div class="">
-                    <?php
-                    // Récupère la référence et la catégorie de l'image associée.
-                    $related_reference_photo = get_field('reference_photo');
-                    $related_categories = get_the_terms(get_the_ID(), 'categorie');
-                    $related_category_names = array();
-
-                    if ($related_categories) {
-                        foreach ($related_categories as $category) {
-                            $related_category_names[] = esc_html($category->name);
-                        }
-                    }
-                    ?>
-                    <div class="photo-info">
-                        <div class="photo-info-left">
-                            <p><?php echo esc_html($related_reference_photo); ?></p>
-                        </div>
-                        <div class="photo-info-right">
-                        </div>
+        ?>
+            <div class="photo-block" data-reference="<?php echo esc_attr(get_field('reference', get_the_ID())); ?>">
+                <a href="<?php the_permalink(); ?>" class="photo-link">
+                    <?php the_post_thumbnail('medium', ['class' => 'photo-thumbnail']); ?>
+                    <div class="overlay">
+                        <span class="photo-title"><?php the_title(); ?></span>
+                        <span class="photo-category">
+                            <?php
+                            $terms = wp_get_post_terms(get_the_ID(), 'categorie', ['fields' => 'names']);
+                            if ($terms) {
+                                echo implode(', ', $terms);
+                            }
+                            ?>
+                        </span>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_eye.png" alt="Voir plus" class="icon-eye">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icon_fullscreen.png" alt="Full screen" class="icon-fullscreen">
                     </div>
-                </div>
+                </a>
             </div>
-        <?php endif; ?>
-    </a>
+        <?php
+            endwhile;
+            wp_reset_postdata();
+        endif;
+        ?>
+    </div>
 </div>
 
-            <?php endwhile; ?>
+            
 
             <?php wp_reset_postdata(); // Restaure les données originales des publications ?>
         </div>

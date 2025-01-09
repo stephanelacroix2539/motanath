@@ -1,65 +1,31 @@
 <?php
 
-
-function mon_theme_enqueue_styles() {
-    // Charger le style du thème principal
+// Enqueue les styles et scripts
+function my_theme_assets() {
+    // Style principal
     wp_enqueue_style('main-style', get_stylesheet_uri());
-}
-add_action('wp_enqueue_scripts', 'mon_theme_enqueue_styles');
-
-
-
-// Menu main-menu
-function register_my_menu() {
-    register_nav_menu( 'main-menu', __( 'Menu principal', 'text-domain' ) );
-}
-add_action( 'after_setup_theme', 'register_my_menu' );
-
-
-//Menu - liens - pied de pages
-function register_footer_menu() {
-    register_nav_menu( 'footer-menu', __( 'Menu du pied de page', 'text-domain' ) );
-}
-add_action( 'after_setup_theme', 'register_footer_menu' );
-
-
-// scripts JS
-function my_theme_enqueue_scripts() {
-    // Enqueue le fichier JavaScript pour la modale
-    wp_enqueue_script('modal-scripts', get_template_directory_uri() . '/js/scripts.js', array(), null, true);
-}
-add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts');
-
-//lightbox
-function enqueue_lightbox_scripts() {
+    
+    // Scripts JavaScript
+    wp_enqueue_script('modal-scripts', get_template_directory_uri() . '/js/scripts.js', [], null, true);
     wp_enqueue_script('lightbox-js', get_template_directory_uri() . '/js/lightbox.js', [], null, true);
-}
-add_action('wp_enqueue_scripts', 'enqueue_lightbox_scripts');
-
-// Burger
-function enqueue_burger_menu_scripts() {
     wp_enqueue_script('burger', get_stylesheet_directory_uri() . '/js/burger.js', [], null, true);
+    wp_enqueue_script('load-more', get_template_directory_uri() . '/js/pagination.js', [], null, true);
+    wp_enqueue_script('custom-filters', get_template_directory_uri() . '/js/filters.js', ['jquery'], null, true);
+    
+    // Localisation pour AJAX
+    wp_localize_script('load-more', 'ajaxurl', admin_url('admin-ajax.php'));
+    wp_localize_script('custom-filters', 'ajax_object', ['ajax_url' => admin_url('admin-ajax.php')]);
 }
-add_action('wp_enqueue_scripts', 'enqueue_burger_menu_scripts');
+add_action('wp_enqueue_scripts', 'my_theme_assets');
 
-
-// Intgration ajax pagination
-
-function my_enqueue_scripts() {
-    wp_enqueue_script( 'load-more', get_template_directory_uri() . '/js/pagination.js', array(), null, true );
-
-    // Ajoute la variable ajaxurl à ton script
-    wp_localize_script( 'load-more', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
+// Enregistrer les menus
+function my_theme_menus() {
+    register_nav_menus([
+        'main-menu' => __('Menu principal', 'text-domain'),
+        'footer-menu' => __('Menu du pied de page', 'text-domain'),
+    ]);
 }
-add_action( 'wp_enqueue_scripts', 'my_enqueue_scripts' );
-
-// Intégration ajax filtres
-function enqueue_custom_scripts() {
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('custom-filters', get_template_directory_uri() . '/js/filters.js', array('jquery'), null, true);
-    wp_localize_script('custom-filters', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
-}
-add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
+add_action('after_setup_theme', 'my_theme_menus');
 
 
 // pagination ajax
