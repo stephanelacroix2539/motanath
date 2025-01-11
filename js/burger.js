@@ -20,3 +20,23 @@ $(document).click(function(event) {
       // console.log('fermé');
   }
 });
+
+
+// version mobile
+document.addEventListener("DOMContentLoaded", function () {
+  const isAdminBar = document.body.classList.contains("admin-bar");
+  if (isAdminBar) {
+      const adminBarHeight = document.getElementById("wpadminbar").offsetHeight || 32;
+      const headerMenu = document.querySelector(".header-menu");
+      const closeButton = document.querySelector(".close-button");
+
+      if (headerMenu) {
+          headerMenu.style.top = `${adminBarHeight + 10}px`;
+          headerMenu.style.height = `calc(100% - ${adminBarHeight + 10}px)`;
+      }
+
+      if (closeButton) {
+          closeButton.style.top = `${adminBarHeight + 10}px`;
+      }
+  }
+});

@@ -298,6 +298,39 @@ header {
   color: red;
 }
 
+/*formulaire mobile */
+@media (max-width: 768px) {
+  .wpcf7-form p {
+    padding-top: 15px;
+  }
+
+  .wpcf7-form-control,
+  .wpcf7-submit {
+    width: 90%; /* Adapte la largeur des champs à l'écran */
+  }
+
+  .wpcf7-response-output {
+    width: 100%;
+    transform: translate(0%, 0%);
+  }
+}
+
+@media (max-width: 480px) {
+  .wpcf7-form p label {
+    font-size: 12px;
+  }
+
+  .wpcf7-form p input,
+  .wpcf7-form p textarea {
+    height: 30px; /* Ajuste automatiquement la hauteur */
+  }
+
+  .wpcf7-form-control,
+  .wpcf7-submit {
+    width: 100%; /* Utilise toute la largeur disponible */
+  }
+}
+
 
 /* Hero */
 .hero {
@@ -601,14 +634,16 @@ header {
     margin-left: 0; /* Supprime les marges */
     margin-right: 0 !important; /* Supprime les marges */
     left:0;
+    margin-top: -19px;
   }
 
 }
 
-
-
-
-
+#filter-category + .select2-container {
+  width: 260px !important;
+  height: 42px !important;
+  margin-bottom: -19px;
+}
 
 
 #photo-results {
@@ -782,6 +817,7 @@ header {
     line-height: 20.73px;
     letter-spacing: 10%;
     text-transform: uppercase;
+    margin-left: 15px;
 }
 
 /* Partie droite de la page et photos */
@@ -1309,7 +1345,7 @@ header {
   transition: 0.4s;
 }
 
-/* Menu burger version mobile */
+
 @media (max-width: 768px) {
   .mobile-menu-button {
       display: block;
@@ -1382,8 +1418,8 @@ header {
       color: #000000;
       font-size: 23px;
       position: absolute;
-      top: 22px;
-      right: 30px;
+      top: 30px;
+      right: 50px;
       cursor: pointer;
       background: none;
       border: none;
@@ -1403,8 +1439,8 @@ header {
     color: #000000;
     font-size: 23px;
     position: absolute;
-    top: 29px;
-    right: 21px;
+    top: 30px;
+    right: 50px;
     border: none;
     background: white;
     cursor: pointer; 
@@ -1475,8 +1511,8 @@ header {
       color: #000000;
       font-size: 23px;
       position: absolute;
-      top: 22px;
-      right: 30px;
+      top: 30px;
+      right: 50px;
   }
 
   body.mobile-menu-opened {
@@ -1506,6 +1542,40 @@ header {
       display: none;
   }
 }
+/* barre admin menu burger */
+/* Pour les utilisateurs avec la barre d'administration WordPress */
+body.admin-bar .mobile-menu-opened .header-menu {
+  top: calc(32px + 10px) !important; /* Ajout de la hauteur de la barre admin + un espace de sécurité */
+  height: calc(100% - 32px - 10px) !important; /* Ajustement de la hauteur */
+  z-index: 1001; /* Assurez-vous que le menu est au-dessus de la barre admin */
+}
+
+/* Ajustement de la position du bouton de fermeture */
+body.admin-bar .close-button {
+  top: calc(32px + 10px) !important; /* Alignez le bouton sous la barre admin */
+}
+
+/* Alignement du conteneur de fermeture */
+body.admin-bar .close-button-container {
+  top: calc(32px + 10px) !important; /* Ajout de la hauteur de la barre admin */
+}
+
+/* Réduction de la hauteur de l'animation si la barre admin est présente */
+body.admin-bar .mobile-menu-opened .header-menu {
+  animation: slideInWithAdmin 0.4s forwards;
+}
+
+@keyframes slideInWithAdmin {
+  from {
+      transform: translateX(100%);
+  }
+  to {
+      transform: translateX(0);
+  }
+}
+
+
+
 
 /*Overlay Menu Burger */
 /* Lorsque le menu est ouvert */
@@ -1663,4 +1733,64 @@ main {
   z-index: 1001;
 }
 
+
+
+/* Styles de la lightbox */
+.lightbox-content {
+  position: relative;
+}
+
+.lightbox-info-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.photo-reference {
+  font-size: 14px;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  margin-top: 850px;
+  text-transform: uppercase; 
+}
+
+.photo-category-lightbox {
+  font-size: 14px;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  margin-top: 850px;
+  text-transform: uppercase; 
+}
+
+/* S'adapte à l'orientation portrait */
+@media (orientation: portrait) {
+  .lightbox-info-overlay {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .photo-reference {
+      margin-bottom: 5px;
+  }
+  .photo-category-lightbox {
+      align-self: flex-end;
+  }
+}
+
+/* S'adapte à l'orientation paysage */
+@media (orientation: landscape) {
+  .lightbox-info-overlay {
+      flex-direction: row;
+      align-items: center;
+  }
+  .photo-reference {
+      margin-right: auto;
+  }
+  .photo-category-lightbox {
+      margin-left: auto;
+  }
+}
 
